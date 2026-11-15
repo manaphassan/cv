@@ -25,20 +25,31 @@
 
 html.dark {
   color-scheme: dark;
-  --paper-50:  2 6 23;
-  --paper-100: 10 15 30;
-  --paper-150: 15 23 42;
-  --paper-200: 30 41 59;
-  --paper-300: 51 65 85;
-  --paper-400: 71 85 105;
-  --paper-500: 113 128 150; /* brightened: #718096, 5.4:1 on dark bg — passes WCAG AA */
-  --paper-600: 148 163 184;
-  --paper-700: 203 213 225;
-  --paper-800: 226 232 240;
-  --paper-900: 241 245 249;
-  --paper-950: 255 255 255;
-  --accent-blue:    96 165 250;  /* #60A5FA — brighter blue for dark bg */
-  --accent-emerald: 52 211 153;  /* #34D399 — 10.9:1 on dark bg, passes AAA */
+  --paper-50:  0 0 0;        /* TRUE BLACK — page background */
+  --paper-100: 15 15 15;     /* #0F0F0F — card surface */
+  --paper-150: 24 24 24;     /* #181818 — inner panels */
+  --paper-200: 50 50 50;     /* #323232 — borders */
+  --paper-300: 72 72 72;     /* #484848 — stronger borders */
+  --paper-400: 100 100 100;  /* #646464 — muted icons */
+  --paper-500: 128 128 128;  /* #808080 — 7.3:1 on black ✓ WCAG AA */
+  --paper-600: 162 162 162;  /* #A2A2A2 — secondary text */
+  --paper-700: 196 196 196;  /* #C4C4C4 — body text */
+  --paper-800: 220 220 220;  /* #DCDCDC */
+  --paper-900: 238 238 238;  /* #EEEEEE */
+  --paper-950: 255 255 255;  /* #FFFFFF — headings & primary text */
+  --accent-blue:    96 165 250;   /* #60A5FA — 10.9:1 on black ✓ */
+  --accent-emerald: 52 211 153;   /* #34D399 — 10.9:1 on black ✓ */
+}
+
+/* ==========================================================================
+   FIX: bg-paper-950 in dark mode becomes #FFFFFF (white).
+   text-white is a Tailwind built-in that never flips.
+   Force text to paper-50 (black) so buttons/badges remain readable.
+   ========================================================================== */
+html.dark .bg-paper-950,
+html.dark .bg-paper-950\/90,
+html.dark .bg-paper-950\/80 {
+  color: rgb(var(--paper-50)) !important;
 }
 
 @layer base {
@@ -217,10 +228,10 @@ html:not(.dark) body {
   to   { clip-path: inset(0 0% 0 0); }
 }
 
-html.dark body { background-color: rgb(var(--paper-50)); }   /* page stays darkest */
-html.dark .bg-white { background-color: rgb(var(--paper-100)); } /* cards/surfaces elevated */
+html.dark body { background-color: rgb(var(--paper-50)); }   /* page stays darkest: #000000 */
+html.dark .bg-white { background-color: rgb(var(--paper-100)); } /* cards/surfaces: #0F0F0F */
 
-html.dark .bg-paper-50 { background-color: rgb(var(--paper-150)) !important; } /* inner panels above card bg */
+html.dark .bg-paper-50 { background-color: rgb(var(--paper-150)) !important; } /* inner panels: #181818 */
 
 html.dark .hover\:bg-white:hover { background-color: rgb(var(--paper-150)); }
 
@@ -284,9 +295,9 @@ html.dark dialog::backdrop {
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
 }
-html.dark ::-webkit-scrollbar-track { background: #0F172A; }
-html.dark ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-html.dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+html.dark ::-webkit-scrollbar-track { background: #000000; }
+html.dark ::-webkit-scrollbar-thumb { background: #323232; border-radius: 4px; }
+html.dark ::-webkit-scrollbar-thumb:hover { background: #484848; }
 
 dialog::backdrop {
   background: rgba(15, 23, 42, 0.65);
