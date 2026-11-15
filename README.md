@@ -1,160 +1,149 @@
-# Harussani Manaphassan — Interactive CV & Portfolio
+<div align="center">
 
-> **Head of Creative · Brand Systems Architect**  
-> *Banting • Cyberjaya • Shah Alam, Malaysia*  
-> 🌐 **Live:** [https://manaphassan.github.io/cv/](https://manaphassan.github.io/cv/)
+# Harussani Manaphassan
 
----
+**Head of Creative · Brand Systems Architect · Product Designer**
 
-## 🧭 About
+*19+ years · Commercial Print → Broadcast → Smart City → Telehealth Product*  
+*Banting • Cyberjaya • Shah Alam, Selangor, Malaysia*
 
-A story-driven, interactive career portfolio for **Harussani Manaphassan** — 19+ years of professional practice across commercial pre-press production, national broadcast television, smart city mobility platforms (JomParking®), digital payment systems (GoPayy+), telehealth product design, and AI-assisted creative workflows.
+[![Live Portfolio](https://img.shields.io/badge/🌐_Live_Portfolio-manaphassan.github.io%2Fcv-020617?style=for-the-badge)](https://manaphassan.github.io/cv/)
+&nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-manaphassan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/manaphassan)
+&nbsp;
+[![Behance](https://img.shields.io/badge/Behance-manaphassan-1769FF?style=for-the-badge&logo=behance&logoColor=white)](https://www.behance.net/manaphassan)
 
-The portfolio is structured as a **5-act career narrative** with 22 projects, an ATS-optimised printable CV, QR contact sharing, and an interactive skill constellation.
-
-> All career narrative, project descriptions, and professional content on this site were written by Harussani Manaphassan. See [`/humans.txt`](https://manaphassan.github.io/cv/humans.txt).
-
----
-
-## 🎯 Core Disciplines
-
-| Discipline | Detail |
-| :--- | :--- |
-| **Brand Identity & Creative Direction** | Multi-brand identity frameworks, design tokens, packaging dielines, and retail POSM |
-| **Product Design & UX/UI** | Mobile app design (iOS/Android, Figma), user journey mapping, wireframing, design systems |
-| **Creative Technology & AI** | AI video pipelines (Google Veo, CapCut), Claude Code, creative asset automation (SS-CAM) |
-| **Development & No-Code** | React, Svelte, NocoBase, HTML5/CSS3, Tailwind CSS, JavaScript, Vite, GitHub Actions |
-| **Commercial Print & Media** | Pre-press CMYK, large-format, broadcast TV production, motion graphics |
+</div>
 
 ---
 
-## 🏆 Featured Work
+## About
 
-| Project | Role | Impact |
-| :--- | :--- | :--- |
-| **[SuamiSihat Telehealth App](https://www.suamisihat.app/)** | Product Design Lead | Designed UX/UI (Figma, iOS/Android) and pitch deck securing **RM100,000 MDEC CIP SPARK grant** |
-| **[JomParking®](https://web.jomparking.com/) & [GoPayy+](https://govicle.com/gopayy/)** | Head of Creative Dept. | Brand ownership across 5 IoT product lines; **Best IoT Startup Malaysia** (Rice Bowl, ASEAN Finalist) |
-| **[Appcable](https://appcable.com/)** | Brand Systems Architect | Full corporate visual identity, Swiss-grid stationery, and brand guidelines |
-| **[SuamiSihat Design System](https://assets.suamisihat.myds.me/)** | Systems Architect | Single Source of Truth design system across 9 holding group brands |
-| **[SS-CAM](https://github.com/SuamiSihat/ss_cam)** | Creator | Windows workstation deployment utility — fonts, palettes, folder hierarchy, Job ID tracking |
-| **PICC, MIDF, NCAP, Zhafwell, TH Hotel…** | Creative Lead | 22 total projects across brand, print, digital, and broadcast — view all at the live site |
+I started on the floor of a commercial printing press in Taiping, Perak — not by design, but because that's where I found work. The CMYK constraints, unforgiving deadlines, and direct client accountability I learned on that floor have shaped every brand system, product, and pitch I've built in the 19 years since.
+
+That foundation runs through:
+
+- A brand identity credited as part of a **Best IoT Startup Malaysia** win at Rice Bowl Startup Awards (ASEAN Finalist)
+- A pitch deck and product UX that helped secure **RM100,000 in MDEC CIP SPARK grant funding**
+- Brand systems directing **9 portfolio brands** at a health technology holding group
+- A **14-year continuous founder trust partnership** across four commercial ventures
+
+This repository is the source for my interactive CV portfolio — a 5-act career narrative with 22 projects, an ATS-optimised printable resume, QR contact sharing, and an interactive skill constellation.
+
+> *Written by a human. See [/humans.txt](https://manaphassan.github.io/cv/humans.txt).*
 
 ---
 
-## ⚡ Portfolio Features
+## The 5-Act Career Story
 
-### Navigation & UX
-- **5-Act Story Chronicle** — career structured as a narrative with scroll-triggered reveals
-- **Sticky Chapter Nav** — desktop pill strip + mobile compact 01–05 chapter pills, both synced to scroll position
-- **Command Palette (`Ctrl+K`)** — keyboard search across all projects, profiles, and links
-- **Scroll-to-Top FAB** — appears after 500px scroll
-- **Dark Mode** — full palette flip via CSS custom properties; persists to `localStorage`; respects OS preference
+| Act | Era | What Happened |
+| :---: | :--- | :--- |
+| **01** | 2007 – 2009 | Started on the press floor in Taiping, Perak. Pre-press CMYK, industrial presses, direct client work. Junior → Senior Designer in 2 years. Helped launch the Kuala Kangsar branch. |
+| **02** | 2009 – 2012 | National broadcast and federal government communications. Embedded photojournalist for the Minister of Home Affairs. Managed RTM documentary production. Won 2nd place, national PSA scriptwriting (KKM/FINAS). |
+| **03** | 2012 – 2018 | Solo creative lead for 6 simultaneous business entities at SMSfocal Group. Designed corporate identity for PICC, MIDF Property, and 9 other clients. Formed the 14-year founder relationship that led everything after. |
+| **04** | 2018 – 2024 | Head of Creative at JomParkir → Govicle. Full brand ownership for JomParking® as it scaled nationally. Rice Bowl Best IoT Startup Malaysia (ASEAN Finalist). Enterprise rebrand across 5 IoT product lines. |
+| **05** | 2024 – Now | Head of Creative for 9 venture brands at Suamisihat Holding. Product Design Lead for SuamiSihat telehealth app (iOS/Android, Figma) — the pitch deck secured RM100,000 MDEC funding. AI video pipelines, brand systems, Appcable identity. |
 
-### Content & Data
-- **22 Projects** across 5 career acts, all data-driven from `src/data/projects.js`
-- **Show-More Collapse** — Act 03 (11 projects) starts collapsed to 6, expands on demand
-- **Discipline Filter** — animated fade-in/out transitions, count badges per category
-- **Live GitHub Repos** — fetches latest repos from GitHub API; falls back to curated list
-- **Dynamic Years Engine** — auto-calculates years of practice, footer year, and status badge
+---
 
-### Interactions
-- **3D Card Tilt** — project cards respond to cursor position with perspective tilt (desktop)
-- **Typewriter Effect** — hero subtitle types in on load
-- **Animated Count-Up** — 5 hero metrics count from zero on scroll into view
-- **Project Quick-Preview** — floating image preview follows cursor above project cards (desktop)
-- **Lightbox Gallery** — prev/next buttons, ← → keyboard, touch swipe, 150ms crossfade
+## Portfolio Features
 
-### Contact & Sharing
-- **QR Code Share** — generates vCard QR or Portfolio URL QR; download as PNG
-- **Save vCard (`.vcf`)** — RFC 2426 contact card, compatible with Apple/Google/Outlook; confetti on save
+<details>
+<summary><strong>Navigation & UX</strong></summary>
+
+- Sticky chapter nav — desktop pill strip + mobile compact `01–05` pills, both synced to scroll
+- Command Palette `Ctrl+K` — search across all projects, profiles, and links
+- Dark mode — full CSS custom-property palette flip; persists via `localStorage`; respects OS `prefers-color-scheme`
+- Scroll-to-top FAB — appears after 500px scroll
+- E-ink paper warm background + WCAG AA colour contrast (4.5:1+)
+
+</details>
+
+<details>
+<summary><strong>Content & Interactions</strong></summary>
+
+- **22 projects** across 5 career acts — all data-driven from `src/data/projects.js`
+- **Show-more collapse** — Act 03's 11 projects starts at 6; expands on demand
+- **Animated discipline filter** — fade transition, per-category count badges
+- **3D card tilt** — project cards respond to cursor with perspective tilt (desktop only)
+- **Typewriter effect** — hero subtitle types in character by character on load
+- **Animated count-up** — 5 hero metrics count from zero via IntersectionObserver
+- **Project quick-preview** — floating image tooltip follows cursor above project cards
+
+</details>
+
+<details>
+<summary><strong>Lightbox Gallery</strong></summary>
+
+- Prev/Next buttons overlaid on main image
+- `←` `→` keyboard navigation
+- Touch swipe (left/right, 48px threshold)
+- 150ms crossfade between gallery images
+- Thumbnail strip with active scroll-into-view
+- Backdrop click to close
+
+</details>
+
+<details>
+<summary><strong>Contact & Sharing</strong></summary>
+
+- **QR Code Share dialog** — generates vCard QR or Portfolio URL QR; download as PNG
+- **Save vCard `.vcf`** — RFC 2426 contact card; Apple Contacts / Google / Outlook compatible; confetti on save
+- **ATS-optimised printable CV** — 1-page resume with Print-to-PDF; forces black text; hides UI chrome
 - **Email CTA** — `mailto:` link in contact section
-- **Printable Executive CV** — ATS-optimised 1-page resume with `Ctrl+P` / Print to PDF
 
-### Visualisation
-- **Skill Constellation** — interactive canvas with 22 animated floating skill nodes, 22 edges, hover highlights, domain legend
-- **Timeline Spine** — scroll-reactive animated vertical progress bar through career chapters
-- **Top Progress Bar** — global reading depth indicator
+</details>
 
-### Accessibility & Performance
-- **WCAG AA** colour contrast (4.5:1+ on all text)
-- **E-ink paper** warm off-white background (`rgb(250 249 247)`)
-- `loading="lazy"` on all gallery images
-- `prefers-color-scheme` respected on first visit
-- Passive scroll event listeners throughout
+<details>
+<summary><strong>Skill Constellation</strong></summary>
 
-### Human Authorship
-- **`/humans.txt`** — human authorship declaration (humanstxt.org standard)
-- **JSON-LD Person schema** — structured data for search engines and AI parsers
-- **Human-Authored certificate** printed on every CV/PDF export
+- 22 animated floating skill nodes across 5 domains (Brand, UX, AI, Tech, Leadership)
+- 22 edges including cross-domain bridges (Figma bridges Brand ↔ UX)
+- Hover highlights active node + connected edges; dims unrelated nodes
+- Tooltip shows skill name and domain
+- Responsive canvas, dark mode aware, pauses on cursor leave
+
+</details>
+
+<details>
+<summary><strong>Human Authorship</strong></summary>
+
+- `/humans.txt` — human authorship declaration following [humanstxt.org](https://humanstxt.org) standard
+- JSON-LD Person schema in `<head>` — structured data for search engines and AI parsers
+- **★ Human-Authored certificate** printed on every exported CV/PDF
 - Specific, verifiable copy (place names, company names, award bodies, amounts) to counter AI-content detectors
 
----
-
-## 🛠️ Built With
-
-| Layer | Technology |
-| :--- | :--- |
-| Core | HTML5, Vanilla JavaScript ES Modules |
-| Bundler | [Vite](https://vitejs.dev/) + `vite-plugin-static-copy` |
-| Styles | [Tailwind CSS v3](https://tailwindcss.com/) with CSS custom property dark mode |
-| Icons | [Lucide](https://lucide.dev/) |
-| QR Code | [qrcode](https://www.npmjs.com/package/qrcode) |
-| Animation | CSS Keyframes, Canvas API (constellation), `requestAnimationFrame` |
-| Confetti | [canvas-confetti](https://www.npmjs.com/package/canvas-confetti) |
-| Hosting | [GitHub Pages](https://pages.github.com/) via GitHub Actions CI/CD |
+</details>
 
 ---
 
-## 🚀 Local Development
+## Tech Stack
+
+```
+HTML5  ·  Vanilla JavaScript (ES Modules)  ·  Tailwind CSS v3
+Vite  ·  Lucide Icons  ·  qrcode  ·  canvas-confetti
+Canvas API (skill constellation)  ·  GitHub Pages  ·  GitHub Actions
+```
+
+---
+
+## Getting Started
 
 ```bash
-# Clone
 git clone https://github.com/manaphassan/cv.git
 cd cv
-
-# Install dependencies
 npm install
-
-# Start dev server (http://localhost:3000)
-npm run dev
-
-# Production build
-npm run build
-
-# Preview production build
-npm run preview
+npm run dev          # → http://localhost:3000
+npm run build        # → dist/
+npm run preview      # preview production build
 ```
 
 ---
 
-## 📁 Project Structure
+## Availability Status
 
-```
-cv/
-├── public/
-│   └── humans.txt              # Human authorship declaration
-├── mywork/                     # Static portfolio images (22 projects)
-│   ├── 01-corporate-identity/
-│   ├── 02-commercial-print-posm/
-│   └── 03-digital-product-ui/
-├── src/
-│   ├── data/
-│   │   ├── career.js           # Career eras, metrics, availability status
-│   │   ├── projects.js         # 22 project entries with gallery data
-│   │   └── skills.js           # Skill domains, tools, credentials
-│   ├── main.js                 # All JS: render, animate, interact
-│   └── style.css               # Tailwind + CSS custom properties
-├── index.html                  # Single-page app shell + all dialogs
-├── tailwind.config.js          # CSS variable-based paper scale
-└── vite.config.js              # Relative base, static copy of mywork/
-```
+The hero badge is controlled by a single line in `src/data/career.js`:
 
----
-
-## 🔧 Configuration
-
-### Availability Badge
-Update one line in `src/data/career.js` to change the hero status badge:
 ```js
 export const availability = {
   status: 'available',    // 'available' | 'limited' | 'unavailable'
@@ -162,32 +151,13 @@ export const availability = {
 };
 ```
 
-### Adding a Project
-Add an entry to the `projects` array in `src/data/projects.js`:
-```js
-{
-  id: 'unique-id',
-  act: 3,                        // 1–5 (which career act)
-  actTitle: 'Act 03: ...',
-  title: 'Project Title',
-  client: 'Client Name',
-  category: 'brand-corp',        // brand-corp | product-ux | print-posm | ai-systems | media-motion
-  year: '2015 – 2017',
-  badge: 'Short Badge Label',
-  summary: 'One paragraph description.',
-  deliverables: ['Item 1', 'Item 2'],
-  impact: 'Business impact sentence.',
-  image: 'mywork/path/to/image.jpg',
-  gallery: ['mywork/...', 'mywork/...'],
-  links: [{ label: 'Live Site', url: 'https://...' }]
-}
-```
+Change `status` and push — the badge updates within minutes via GitHub Actions.
 
 ---
 
-## 📬 Connect
+## Connect
 
-| Channel | Link |
+| | |
 | :--- | :--- |
 | 🌐 Portfolio | [manaphassan.github.io/cv](https://manaphassan.github.io/cv/) |
 | 💼 LinkedIn | [linkedin.com/in/manaphassan](https://www.linkedin.com/in/manaphassan) |
@@ -198,4 +168,8 @@ Add an entry to the `projects` array in `src/data/projects.js`:
 
 ---
 
+<div align="center">
+
 &copy; 2007 – Present Harussani Manaphassan. All rights reserved.
+
+</div>
