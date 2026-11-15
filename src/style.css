@@ -12,13 +12,14 @@
   --paper-200: 226 232 240;
   --paper-300: 203 213 225;
   --paper-400: 148 163 184;
-  --paper-500: 100 116 139;
+  --paper-500: 85 100 118;   /* darkened: #556476, 5.8:1 on white — passes WCAG AA */
   --paper-600: 71 85 105;
   --paper-700: 51 65 85;
   --paper-800: 30 41 59;
   --paper-900: 15 23 42;
   --paper-950: 2 6 23;
   --accent-blue: 29 78 216;
+  --paper-bg: 250 249 247;   /* warm e-ink off-white */
 }
 
 html.dark {
@@ -171,8 +172,46 @@ html.dark {
 }
 
 /* ==========================================================================
-   DARK MODE OVERRIDES (bg-white & hardcoded values)
+   E-INK PAPER OPTIMISATION
    ========================================================================== */
+
+/* Warm off-white body — not cold pure white */
+html:not(.dark) body {
+  background-color: rgb(var(--paper-bg)) !important;
+}
+
+/* Crisper card borders for high-contrast e-ink feel */
+.story-card {
+  border-color: rgb(var(--paper-300)) !important;
+  box-shadow: 0 1px 4px rgb(var(--paper-950) / 0.05);
+}
+
+/* ==========================================================================
+   CARD 3D TILT (desktop pointer:fine only — applied via JS)
+   ========================================================================== */
+.story-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   TYPEWRITER CURSOR BLINK
+   ========================================================================== */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50%       { border-color: currentColor; }
+}
+
+.typewriter-active {
+  border-right: 2px solid currentColor;
+  animation: blink-caret 0.7s step-end infinite;
+}
+
+/* Smooth clip-path reveal fallback */
+@keyframes type-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
 
 html.dark body,
 html.dark .bg-white { background-color: rgb(var(--paper-50)); }

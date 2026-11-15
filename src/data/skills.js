@@ -38,10 +38,14 @@ export const skillDomains = [
     description: "Augmenting creative output with modern generative AI video workflows and automated asset pipelines to maximize commercial speed.",
     skills: [
       "AI Video Production (Google Veo)",
+      "AI Generative Video Direction",
+      "CapCut Video Editing",
+      "Claude AI & Claude Code",
       "Generative AI Visual Direction",
       "Creative Asset Automation",
       "Motion Graphics & Animation",
       "Video Post-Production",
+      "React (Mobile Apps) & NocoBase",
       "HTML5 / CSS3 / Tailwind CSS",
       "Front-End Developer Handoff"
     ]
@@ -66,19 +70,33 @@ export const skillDomains = [
 export const toolsAndSoftware = [
   {
     category: "Design & Creative",
-    tools: ["Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign", "Adobe After Effects", "Figma", "Canva"]
+    tools: [
+      "Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign", "Adobe After Effects",
+      "Affinity Designer", "Affinity Publisher", "Affinity Photo",
+      "Figma", "Canva"
+    ]
   },
   {
-    category: "AI & Automation",
-    tools: ["Google Veo", "Generative AI Prompting", "Creative Workflow Automation", "SS-CAM (Windows PowerShell)"]
+    category: "AI & Video Production",
+    tools: [
+      "Google Veo", "AI Generative Video", "CapCut",
+      "Claude AI", "Claude Code", "Generative AI Prompting"
+    ]
   },
   {
-    category: "Development & Deployment",
-    tools: ["HTML5", "CSS3", "Tailwind CSS", "JavaScript", "Vite", "Git", "GitHub Actions", "GitHub Pages"]
+    category: "Development & No-Code",
+    tools: [
+      "React (Mobile Apps)", "NocoBase",
+      "HTML5", "CSS3", "Tailwind CSS", "JavaScript",
+      "Vite", "Git", "GitHub Actions"
+    ]
   },
   {
-    category: "Productivity & Presentation",
-    tools: ["Microsoft Office Suite", "Google Workspace", "PowerPoint", "Keynote"]
+    category: "Productivity & Operations",
+    tools: [
+      "Microsoft Office Suite", "Google Workspace",
+      "PowerPoint", "Keynote", "SS-CAM (PowerShell)"
+    ]
   }
 ];
 

@@ -91,7 +91,7 @@ function renderProjectCard(p) {
     <article 
       data-id="${p.id}"
       data-category="${p.category}"
-      class="story-card group cursor-pointer border border-paper-200 rounded-2xl overflow-hidden bg-white hover:border-paper-400 transition-all flex flex-col justify-between">
+      class="story-card group cursor-pointer border border-paper-300 rounded-2xl overflow-hidden bg-white hover:border-paper-500 transition-all flex flex-col justify-between">
       
       <div>
         <!-- Image Frame -->
@@ -948,6 +948,67 @@ function initDarkMode() {
   });
 }
 
+/* ==========================================================================
+   NEW: HERO TYPEWRITER EFFECT
+   ========================================================================== */
+function initTypewriter() {
+  const el = document.getElementById('hero-typewriter');
+  if (!el || !el.dataset.typewriter) return;
+
+  const rawText = el.textContent;
+  const delay   = parseInt(el.dataset.delay || '700', 10);
+
+  // Decode HTML entities into real characters for the type loop
+  const decoded = document.createElement('textarea');
+  decoded.innerHTML = rawText;
+  const text = decoded.value;
+
+  el.textContent = '';
+  el.classList.add('typewriter-active');
+
+  let i = 0;
+  setTimeout(() => {
+    const timer = setInterval(() => {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) {
+        clearInterval(timer);
+        setTimeout(() => el.classList.remove('typewriter-active'), 1800);
+      }
+    }, 48);
+  }, delay);
+}
+
+/* ==========================================================================
+   NEW: 3D CARD TILT (desktop pointer:fine only)
+   ========================================================================== */
+function initCardTilt() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  document.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('.story-card');
+    if (!card || card.dataset.tiltBound) return;
+    card.dataset.tiltBound = '1';
+
+    function onMove(ev) {
+      const r  = card.getBoundingClientRect();
+      const x  = ev.clientX - r.left  - r.width  / 2;
+      const y  = ev.clientY - r.top   - r.height / 2;
+      const tx = -(y / (r.height / 2)) * 7;
+      const ty =  (x / (r.width  / 2)) * 7;
+      card.style.transform  = `perspective(900px) rotateX(${tx}deg) rotateY(${ty}deg) translateZ(6px)`;
+      card.style.transition = 'transform 0.08s ease-out';
+    }
+
+    function onLeave() {
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      card.style.transform  = '';
+    }
+
+    card.addEventListener('mousemove',  onMove);
+    card.addEventListener('mouseleave', onLeave);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
   initDynamicYears();
@@ -964,5 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeAndContact();
   initLightboxNavigation();
   initScrollToTop();
+  initTypewriter();
+  initCardTilt();
   refreshIcons();
 });
