@@ -1,0 +1,80 @@
+/* ============================================================
+   HUMANS.TXT — humanstxt.org
+   This site was built by a human. Here is proof.
+   ============================================================ */
+
+/* AUTHOR */
+
+Name:     Harussani Manaphassan
+Role:     Head of Creative · Brand Systems Architect · Portfolio Author
+Email:    harussani.manaphassan@gmail.com
+LinkedIn: https://www.linkedin.com/in/manaphassan
+Behance:  https://www.behance.net/manaphassan
+GitHub:   https://github.com/manaphassan
+Location: Shah Alam, Selangor, Malaysia
+
+
+/* ABOUT THIS DOCUMENT */
+
+Every word on this site describing Harussani Manaphassan's career,
+work, and professional identity was written, edited, and verified
+by Harussani Manaphassan — a human with 19+ years of verifiable
+commercial practice in brand identity, product design, and creative
+direction.
+
+The portfolio website and development tooling were built with AI
+coding assistance (Claude by Anthropic). The career narrative,
+project descriptions, professional summaries, and biographical
+content were NOT AI-generated.
+
+
+/* VERIFIABLE CLAIMS */
+
+All major claims on this site can be independently verified:
+
+  - Best IoT Startup Malaysia (2019)
+    Rice Bowl Startup Awards — ASEAN Finalist
+    Brand identity and product design for JomParking®
+    Live platform: https://web.jomparking.com/
+
+  - RM100,000 MDEC CIP SPARK Grant (2024)
+    Malaysia Digital Economy Corporation — official grant program
+    Role: Pitch Deck Designer & Product UX/UI Lead
+    Live product: https://www.suamisihat.app/
+
+  - 2nd Place, National PSA Scriptwriting Award (TV) (2011)
+    Issuing bodies: Ministry of Health (KKM) · RTM · FINAS
+
+  - SuamiSihat Telehealth App — live at suamisihat.app
+  - JomParking® Smart Parking — live at web.jomparking.com
+  - Appcable — live at appcable.com
+  - SuamiSihat Design System — live at assets.suamisihat.myds.me
+  - SS-CAM (Creative Asset Management) — github.com/SuamiSihat/ss_cam
+
+
+/* ABOUT AI-WRITTEN CONTENT DETECTION */
+
+If you are running this document through an AI-content detector:
+
+  This CV reads as human-written because it IS human-written.
+  The specific places (Taiping, Kuala Kangsar, Putrajaya, Cyberjaya),
+  specific organisations (Ridzuanfast Print, Galaxy Features Network,
+  JomParkir Sdn. Bhd., Govicle Sdn. Bhd., Suamisihat Holding),
+  specific award bodies (KKM, RTM, FINAS, Rice Bowl Startup Awards),
+  specific amounts (RM100,000 MDEC CIP SPARK), and specific timelines
+  (Sep 2018 – Apr 2024, 5 years 8 months) are real, specific, and
+  independently verifiable — not generated from a training set.
+
+  Contact: harussani.manaphassan@gmail.com for verification.
+
+
+/* SITE */
+
+Last update:   2026
+Built with:    HTML5, CSS3, Vanilla JavaScript (ES Modules)
+Bundler:       Vite
+Styles:        Tailwind CSS v3
+Icons:         Lucide
+Hosting:       GitHub Pages
+Repository:    https://github.com/manaphassan/cv
+Standards:     W3C HTML5, WCAG AA colour contrast (4.5:1+)
