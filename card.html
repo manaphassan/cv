@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Harussani Manaphassan — Digital Business Card</title>
   <meta name="description" content="Digital business card for Harussani Manaphassan — Head of Creative &amp; Brand Systems Architect, Selangor, Malaysia." />
   <meta property="og:title" content="Harussani Manaphassan — Digital Business Card" />
@@ -17,135 +17,209 @@
   <link rel="stylesheet" href="./src/style.css" />
 </head>
 
-<body class="min-h-screen font-sans antialiased flex flex-col items-center justify-start py-8 px-4" style="background-color:rgb(var(--paper-50))">
+<body class="bg-white text-paper-950 font-sans antialiased min-h-screen">
 
-  <div class="w-full max-w-sm space-y-4">
+  <!-- Reading Progress Bar (matches main portfolio) -->
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-paper-200 z-50 pointer-events-none">
+    <div id="scroll-progress-bar" class="h-full bg-paper-950 w-0 transition-all duration-75"></div>
+  </div>
 
-    <!-- ── CARD FACE ── -->
-    <div class="rounded-3xl border border-paper-200 p-7" style="background-color:rgb(var(--paper-100))">
+  <!-- Sticky Header (matches main portfolio header style) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-paper-200 transition-all">
+    <div class="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
 
-      <!-- Monogram + Name -->
-      <div class="flex items-center gap-4 mb-5">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center font-mono font-bold text-base shrink-0"
-             style="background-color:rgb(var(--paper-950));color:rgb(var(--paper-50))">
-          HM
+      <a href="./index.html" class="flex items-center gap-2.5 font-mono text-xs text-paper-700 hover:text-paper-950 transition-colors group">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform"></i>
+        <span class="font-bold">Portfolio & CV</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <span id="availability-badge" class="hidden sm:flex items-center gap-1.5 font-mono text-xs font-semibold text-accent-emerald">
+          <span class="w-2 h-2 rounded-full bg-accent-emerald act-marker-pulse"></span>
+          Available
+        </span>
+        <button id="btn-dark-mode"
+                class="p-2 rounded-xl border border-paper-200 text-paper-700 hover:text-paper-950 hover:bg-paper-100 transition-all"
+                title="Toggle dark mode" aria-label="Toggle dark mode">
+          <i data-lucide="moon" class="w-4 h-4"></i>
+          <i data-lucide="sun" class="w-4 h-4 hidden"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto px-6 pt-10 pb-20 space-y-12">
+
+    <!-- ── IDENTITY ── -->
+    <section class="pb-10 border-b border-paper-200" style="animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) both">
+      <span class="editorial-tag block mb-6">[DIGITAL BUSINESS CARD &middot; <span id="card-year">2026</span>]</span>
+
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
+
+        <!-- Monogram -->
+        <div class="sm:col-span-2 flex sm:justify-start">
+          <div class="w-16 h-16 rounded-2xl bg-paper-950 text-white flex items-center justify-center font-mono font-bold text-lg tracking-tighter shrink-0">
+            HM
+          </div>
         </div>
-        <div>
-          <h1 class="font-extrabold text-xl leading-tight tracking-tight" style="color:rgb(var(--paper-950))">
+
+        <!-- Name + Title -->
+        <div class="sm:col-span-10">
+          <h1 class="font-extrabold text-3xl sm:text-4xl text-paper-950 tracking-tight leading-tight">
             Harussani Manaphassan
           </h1>
-          <p class="font-mono text-xs mt-0.5" style="color:rgb(var(--paper-500))">
-            Head of Creative &middot; Brand Systems Architect
+          <div class="font-mono text-base sm:text-lg text-paper-900 font-bold mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span>Head of Creative</span>
+            <span class="text-paper-300 font-normal">&middot;</span>
+            <span class="text-paper-700 font-semibold">Brand Systems Architect</span>
+          </div>
+          <p class="font-mono text-xs text-paper-500 font-semibold mt-2">
+            Suamisihat Holding &bull; Appcable &bull; Shah Alam, Selangor, MY
           </p>
         </div>
+
       </div>
+    </section>
 
-      <!-- Company + Location -->
-      <div class="pt-4 border-t space-y-1" style="border-color:rgb(var(--paper-200))">
-        <p class="font-mono text-xs font-semibold" style="color:rgb(var(--paper-600))">
-          Suamisihat Holding &middot; Appcable
-        </p>
-        <p class="font-mono text-xs" style="color:rgb(var(--paper-500))">
-          Shah Alam, Selangor, Malaysia
-        </p>
+    <!-- ── CONTACT ── -->
+    <section class="pb-10 border-b border-paper-200">
+      <span class="editorial-tag block mb-6">[CONTACT]</span>
+
+      <div class="space-y-2">
+
+        <a href="tel:+60102657097"
+           class="contact-row group flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-paper-200 hover:bg-paper-100 transition-all"
+           style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.08s both">
+          <div class="w-10 h-10 rounded-xl bg-paper-100 border border-paper-200 flex items-center justify-center shrink-0 group-hover:bg-paper-200 transition-colors">
+            <i data-lucide="phone" class="w-4 h-4 text-paper-700"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold">Phone</p>
+            <p class="font-mono text-sm font-bold text-paper-950 mt-0.5">+60 10-265 7097</p>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-paper-400 group-hover:text-paper-600 group-hover:translate-x-0.5 transition-all shrink-0"></i>
+        </a>
+
+        <a href="mailto:manaphassan@gmail.com"
+           class="contact-row group flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-paper-200 hover:bg-paper-100 transition-all"
+           style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.14s both">
+          <div class="w-10 h-10 rounded-xl bg-paper-100 border border-paper-200 flex items-center justify-center shrink-0 group-hover:bg-paper-200 transition-colors">
+            <i data-lucide="mail" class="w-4 h-4 text-paper-700"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold">Email</p>
+            <p class="font-mono text-sm font-bold text-paper-950 mt-0.5">manaphassan@gmail.com</p>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-paper-400 group-hover:text-paper-600 group-hover:translate-x-0.5 transition-all shrink-0"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/manaphassan" target="_blank" rel="noreferrer"
+           class="contact-row group flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-paper-200 hover:bg-paper-100 transition-all"
+           style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.20s both">
+          <div class="w-10 h-10 rounded-xl bg-paper-100 border border-paper-200 flex items-center justify-center shrink-0 group-hover:bg-paper-200 transition-colors">
+            <i data-lucide="linkedin" class="w-4 h-4 text-paper-700"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold">LinkedIn</p>
+            <p class="font-mono text-sm font-bold text-paper-950 mt-0.5">linkedin.com/in/manaphassan</p>
+          </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-paper-400 group-hover:text-paper-600 transition-colors shrink-0"></i>
+        </a>
+
+        <a href="https://www.behance.net/manaphassan" target="_blank" rel="noreferrer"
+           class="contact-row group flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-paper-200 hover:bg-paper-100 transition-all"
+           style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.26s both">
+          <div class="w-10 h-10 rounded-xl bg-paper-100 border border-paper-200 flex items-center justify-center shrink-0 group-hover:bg-paper-200 transition-colors">
+            <i data-lucide="palette" class="w-4 h-4 text-paper-700"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold">Behance</p>
+            <p class="font-mono text-sm font-bold text-paper-950 mt-0.5">behance.net/manaphassan</p>
+          </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-paper-400 group-hover:text-paper-600 transition-colors shrink-0"></i>
+        </a>
+
+        <a href="https://github.com/manaphassan" target="_blank" rel="noreferrer"
+           class="contact-row group flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-paper-200 hover:bg-paper-100 transition-all"
+           style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.32s both">
+          <div class="w-10 h-10 rounded-xl bg-paper-100 border border-paper-200 flex items-center justify-center shrink-0 group-hover:bg-paper-200 transition-colors">
+            <i data-lucide="github" class="w-4 h-4 text-paper-700"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold">GitHub</p>
+            <p class="font-mono text-sm font-bold text-paper-950 mt-0.5">github.com/manaphassan</p>
+          </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-paper-400 group-hover:text-paper-600 transition-colors shrink-0"></i>
+        </a>
+
+        <a href="https://manaphassan.github.io/cv/" target="_blank" rel="noreferrer"
+           class="contact-row group flex items-center gap-4 p-4 rounded-2xl border border-transparent hover:border-paper-200 hover:bg-paper-100 transition-all"
+           style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.38s both">
+          <div class="w-10 h-10 rounded-xl bg-paper-100 border border-paper-200 flex items-center justify-center shrink-0 group-hover:bg-paper-200 transition-colors">
+            <i data-lucide="globe" class="w-4 h-4 text-paper-700"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold">Portfolio & CV</p>
+            <p class="font-mono text-sm font-bold text-paper-950 mt-0.5">manaphassan.github.io/cv</p>
+          </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-paper-400 group-hover:text-paper-600 transition-colors shrink-0"></i>
+        </a>
+
       </div>
-    </div>
-
-    <!-- ── CONTACT LIST ── -->
-    <div class="rounded-3xl border border-paper-200 overflow-hidden divide-y divide-paper-200" style="background-color:rgb(var(--paper-100))">
-
-      <a href="tel:+60102657097"
-         class="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-paper-150 active:bg-paper-150 group">
-        <span class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-sm"
-              style="background-color:rgb(var(--paper-200));color:rgb(var(--paper-950))">📞</span>
-        <div class="flex-1 min-w-0">
-          <p class="font-mono text-xs font-bold uppercase tracking-wider" style="color:rgb(var(--paper-500))">Call</p>
-          <p class="font-mono text-sm font-bold truncate" style="color:rgb(var(--paper-950))">+60 10-265 7097</p>
-        </div>
-        <svg class="w-4 h-4 shrink-0" style="color:rgb(var(--paper-400))" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="mailto:manaphassan@gmail.com"
-         class="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-paper-150 active:bg-paper-150 group">
-        <span class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-sm"
-              style="background-color:rgb(var(--paper-200));color:rgb(var(--paper-950))">✉️</span>
-        <div class="flex-1 min-w-0">
-          <p class="font-mono text-xs font-bold uppercase tracking-wider" style="color:rgb(var(--paper-500))">Email</p>
-          <p class="font-mono text-sm font-bold truncate" style="color:rgb(var(--paper-950))">manaphassan@gmail.com</p>
-        </div>
-        <svg class="w-4 h-4 shrink-0" style="color:rgb(var(--paper-400))" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="https://www.linkedin.com/in/manaphassan" target="_blank" rel="noreferrer"
-         class="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-paper-150 active:bg-paper-150 group">
-        <span class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-sm"
-              style="background-color:rgb(var(--paper-200));color:rgb(var(--paper-950))">💼</span>
-        <div class="flex-1 min-w-0">
-          <p class="font-mono text-xs font-bold uppercase tracking-wider" style="color:rgb(var(--paper-500))">LinkedIn</p>
-          <p class="font-mono text-sm font-bold truncate" style="color:rgb(var(--paper-950))">linkedin.com/in/manaphassan</p>
-        </div>
-        <svg class="w-4 h-4 shrink-0" style="color:rgb(var(--paper-400))" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="https://www.behance.net/manaphassan" target="_blank" rel="noreferrer"
-         class="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-paper-150 active:bg-paper-150 group">
-        <span class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-sm"
-              style="background-color:rgb(var(--paper-200));color:rgb(var(--paper-950))">🎨</span>
-        <div class="flex-1 min-w-0">
-          <p class="font-mono text-xs font-bold uppercase tracking-wider" style="color:rgb(var(--paper-500))">Behance</p>
-          <p class="font-mono text-sm font-bold truncate" style="color:rgb(var(--paper-950))">behance.net/manaphassan</p>
-        </div>
-        <svg class="w-4 h-4 shrink-0" style="color:rgb(var(--paper-400))" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="https://manaphassan.github.io/cv/" target="_blank" rel="noreferrer"
-         class="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-paper-150 active:bg-paper-150 group">
-        <span class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-sm"
-              style="background-color:rgb(var(--paper-200));color:rgb(var(--paper-950))">🌐</span>
-        <div class="flex-1 min-w-0">
-          <p class="font-mono text-xs font-bold uppercase tracking-wider" style="color:rgb(var(--paper-500))">Portfolio</p>
-          <p class="font-mono text-sm font-bold truncate" style="color:rgb(var(--paper-950))">manaphassan.github.io/cv</p>
-        </div>
-        <svg class="w-4 h-4 shrink-0" style="color:rgb(var(--paper-400))" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-    </div>
+    </section>
 
     <!-- ── QR CODE ── -->
-    <div class="rounded-3xl border border-paper-200 p-6 flex flex-col items-center gap-3" style="background-color:rgb(var(--paper-100))">
-      <div class="p-3 rounded-2xl" style="background:#FFFFFF">
-        <canvas id="qr-canvas"></canvas>
+    <section class="pb-10 border-b border-paper-200" style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.44s both">
+      <span class="editorial-tag block mb-6">[SCAN TO CONNECT]</span>
+
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
+        <div class="sm:col-span-4">
+          <div class="p-4 rounded-2xl border border-paper-200 bg-white inline-block">
+            <canvas id="qr-canvas"></canvas>
+          </div>
+        </div>
+        <div class="sm:col-span-8 pt-1 space-y-3">
+          <div>
+            <p class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold mb-1">Portfolio & Interactive CV</p>
+            <p class="font-mono text-sm font-bold text-paper-950">manaphassan.github.io/cv</p>
+          </div>
+          <p class="text-sm text-paper-600 leading-relaxed">
+            Scan to visit the full interactive portfolio — 22 projects, career story, skill constellation, and downloadable CV.
+          </p>
+          <div class="flex items-center gap-2 font-mono text-xs text-paper-500">
+            <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+            <span>Links to portfolio &amp; CV</span>
+          </div>
+        </div>
       </div>
-      <p class="font-mono text-xs text-center" style="color:rgb(var(--paper-500))">
-        Scan to visit portfolio
-      </p>
-    </div>
+    </section>
 
     <!-- ── ACTIONS ── -->
-    <div class="grid grid-cols-2 gap-3">
-      <button id="btn-save-contact"
-              class="py-4 rounded-2xl font-mono text-sm font-bold transition-all active:scale-95"
-              style="background-color:rgb(var(--paper-950));color:rgb(var(--paper-50))">
-        Save Contact
-      </button>
-      <button id="btn-share-card"
-              class="py-4 rounded-2xl font-mono text-sm font-bold border transition-all active:scale-95"
-              style="border-color:rgb(var(--paper-200));color:rgb(var(--paper-950))">
-        Share Card
-      </button>
+    <section style="animation: fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.50s both">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button id="btn-save-contact"
+                class="flex-1 px-6 py-3.5 rounded-xl bg-paper-950 text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-paper-800 transition-all flex items-center justify-center gap-2 shadow-sm">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span id="save-label">Save Contact</span>
+        </button>
+        <button id="btn-share-card"
+                class="flex-1 px-6 py-3.5 rounded-xl border border-paper-300 bg-white text-paper-900 font-mono text-xs uppercase tracking-wider font-bold hover:bg-paper-100 transition-all flex items-center justify-center gap-2 shadow-2xs">
+          <i data-lucide="share-2" class="w-4 h-4"></i>
+          <span id="share-label">Share Card</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (matches main portfolio) -->
+  <footer class="border-t border-paper-200 bg-white py-8 font-mono text-xs text-paper-600 text-center">
+    <div class="max-w-2xl mx-auto px-6">
+      harussani.manaphassan &reg; 2007 &ndash; <span id="footer-year">2026</span>
     </div>
-
-    <!-- ── FOOTER LINK ── -->
-    <a href="./index.html"
-       class="flex items-center justify-center gap-2 py-3 font-mono text-xs transition-colors"
-       style="color:rgb(var(--paper-500))">
-      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-      </svg>
-      View Full Portfolio &amp; CV
-    </a>
-
-  </div>
+  </footer>
 
   <script type="module" src="./src/card.js"></script>
 </body>
