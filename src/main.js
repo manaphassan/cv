@@ -1163,16 +1163,25 @@ function initVCardQR() {
    NEW: SKILL CONSTELLATION (canvas)
    ========================================================================== */
 function initSkillConstellation() {
-  const canvas  = document.getElementById('skill-constellation');
-  const tooltip = document.getElementById('constellation-tooltip');
+  const canvas   = document.getElementById('skill-constellation');
+  const tooltip  = document.getElementById('constellation-tooltip');
   const legendEl = document.getElementById('constellation-legend');
+  const infoPanel = document.getElementById('constellation-info');
+  const cstDot   = document.getElementById('cst-dot');
+  const cstName  = document.getElementById('cst-name');
+  const cstMeta  = document.getElementById('cst-meta');
+  const cstHint  = document.getElementById('cst-hint');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
   let W = 0, H = 0, dpr = 1;
-  let hoverNodeId = null;
+  let hoverNodeId    = null;
+  let selectedNodeId = null;
   let conT = 0;
+  let animating = false;
+  let rafId = null;
 
+  /* ---- sizing ---- */
   function resize() {
     dpr = window.devicePixelRatio || 1;
     const wrap = canvas.parentElement;
@@ -1186,130 +1195,245 @@ function initSkillConstellation() {
     ctx.scale(dpr, dpr);
   }
 
+  /* ---- node position (animated float) ---- */
   function nodePos(node) {
     const phase = CONST_NODES.indexOf(node) * 0.71;
-    const amp   = 3.5;
+    const amp   = 3;
     return {
-      x: (node.x / 100) * W + Math.sin(conT * 0.5 + phase) * amp,
-      y: (node.y / 100) * H + Math.cos(conT * 0.4 + phase * 1.3) * amp,
+      x: (node.x / 100) * W + Math.sin(conT * 0.5  + phase) * amp,
+      y: (node.y / 100) * H + Math.cos(conT * 0.4  + phase * 1.3) * amp,
     };
   }
 
+  /* ---- smaller nodes: max 11px radius ---- */
   function nodeRadius(node) {
-    return (node.r / 100) * Math.min(W, H) * 0.9;
+    return Math.max(5, Math.min((node.r / 100) * Math.min(W, H) * 0.38, 11));
   }
 
   function isDarkMode() { return document.documentElement.classList.contains('dark'); }
 
+  /* ---- update the info panel below canvas ---- */
+  function updateInfoPanel(node) {
+    if (!infoPanel) return;
+    if (!node) {
+      infoPanel.style.opacity = '0';
+      return;
+    }
+    const meta = DOMAIN_META[node.domain];
+    const conCount = CONST_EDGES.filter(([a, b]) => a === node.id || b === node.id).length;
+    if (cstDot)  { cstDot.style.background  = meta?.color || '#64748B'; }
+    if (cstName) { cstName.textContent = node.label; }
+    if (cstMeta) { cstMeta.textContent = (meta?.label || '') + ' · ' + conCount + ' connection' + (conCount !== 1 ? 's' : ''); }
+    if (cstHint) { cstHint.textContent = node.id === selectedNodeId ? 'Click to deselect' : 'Click to lock'; }
+    infoPanel.style.opacity = '1';
+  }
+
+  /* ---- main draw loop ---- */
   function draw() {
-    conT += 0.012;
+    if (!animating) { rafId = null; return; }
+    conT += 0.011;
     ctx.clearRect(0, 0, W, H);
 
-    const dark = isDarkMode();
+    const dark    = isDarkMode();
+    const activeId = selectedNodeId || hoverNodeId;
     const connected = new Set();
-    if (hoverNodeId) {
+    if (activeId) {
       CONST_EDGES.forEach(([a, b]) => {
-        if (a === hoverNodeId) connected.add(b);
-        if (b === hoverNodeId) connected.add(a);
+        if (a === activeId) connected.add(b);
+        if (b === activeId) connected.add(a);
       });
     }
 
-    // Edges
-    CONST_EDGES.forEach(([aId, bId]) => {
+    /* -- edges -- */
+    CONST_EDGES.forEach(([aId, bId], ei) => {
       const a = CONST_NODES.find(n => n.id === aId);
       const b = CONST_NODES.find(n => n.id === bId);
       if (!a || !b) return;
       const pa = nodePos(a), pb = nodePos(b);
-      const isLit = hoverNodeId && (aId === hoverNodeId || bId === hoverNodeId);
+      const isLit = activeId && (aId === activeId || bId === activeId);
+
       ctx.beginPath();
       ctx.moveTo(pa.x, pa.y);
       ctx.lineTo(pb.x, pb.y);
       ctx.strokeStyle = isLit
-        ? (dark ? 'rgba(203,213,225,0.45)' : 'rgba(51,65,85,0.35)')
-        : (dark ? 'rgba(203,213,225,0.1)'  : 'rgba(51,65,85,0.12)');
-      ctx.lineWidth = isLit ? 1.2 : 0.6;
+        ? (dark ? 'rgba(200,200,200,0.5)' : 'rgba(30,41,59,0.4)')
+        : (dark ? 'rgba(200,200,200,0.07)' : 'rgba(30,41,59,0.09)');
+      ctx.lineWidth = isLit ? 1.5 : 0.5;
+      ctx.setLineDash([]);
       ctx.stroke();
+
+      /* traveling dot on lit edges */
+      if (isLit) {
+        const color = DOMAIN_META[a.domain]?.color || '#64748B';
+        const prog  = ((conT * 0.6 + ei * 0.41) % 1 + 1) % 1;
+        const dx = pa.x + (pb.x - pa.x) * prog;
+        const dy = pa.y + (pb.y - pa.y) * prog;
+        ctx.beginPath();
+        ctx.arc(dx, dy, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = color + 'CC';
+        ctx.fill();
+      }
     });
 
-    // Nodes
+    /* -- nodes -- */
     CONST_NODES.forEach(node => {
       const { x, y } = nodePos(node);
       const r     = nodeRadius(node);
       const color = DOMAIN_META[node.domain]?.color || '#64748B';
-      const isHov = node.id === hoverNodeId;
-      const isCon = connected.has(node.id);
-      const isDim = hoverNodeId && !isHov && !isCon;
+      const isActive = node.id === activeId;
+      const isSel    = node.id === selectedNodeId;
+      const isCon    = connected.has(node.id);
+      const isDim    = !!activeId && !isActive && !isCon;
 
-      if (isHov) {
+      /* glow layers for active node */
+      if (isActive) {
         ctx.beginPath();
-        ctx.arc(x, y, r * 2.6, 0, Math.PI * 2);
+        ctx.arc(x, y, r * 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = color + '14';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, r * 1.9, 0, Math.PI * 2);
         ctx.fillStyle = color + '22';
         ctx.fill();
       }
 
+      /* dashed selection ring */
+      if (isSel) {
+        ctx.beginPath();
+        ctx.arc(x, y, r + 5, 0, Math.PI * 2);
+        ctx.strokeStyle = color + '70';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      /* node fill */
       ctx.beginPath();
       ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fillStyle = isDim ? color + '30' : color + (isHov ? 'FF' : 'CC');
+      ctx.fillStyle = isDim
+        ? color + '22'
+        : color + (isActive ? 'FF' : isCon ? 'DD' : 'AA');
       ctx.fill();
 
-      if (isHov || isCon) {
+      if (isActive || isCon) {
         ctx.strokeStyle = color;
         ctx.lineWidth = 1.5;
+        ctx.setLineDash([]);
         ctx.stroke();
       }
 
-      if (!isDim) {
-        const fsize = Math.max(9, r * 0.95);
-        ctx.font = `${isHov ? 'bold ' : ''}${fsize}px 'JetBrains Mono', monospace`;
-        ctx.fillStyle = dark ? 'rgba(226,232,240,0.9)' : 'rgba(15,23,42,0.85)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
-        ctx.fillText(node.label, x, y + r + 3);
-      }
+      /* labels — always visible, variable opacity */
+      const labelOpacity = isDim ? 0.15 : isActive ? 0.95 : isCon ? 0.75 : 0.5;
+      const fsize = Math.max(8, r * 0.88);
+      ctx.font = `${isActive ? 'bold ' : ''}${fsize}px 'JetBrains Mono',monospace`;
+      ctx.fillStyle = dark
+        ? `rgba(240,240,240,${labelOpacity})`
+        : `rgba(15,23,42,${labelOpacity})`;
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(node.label, x, y + r + 3);
     });
 
-    requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
   }
 
-  canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
+  /* ---- resolve node under pointer/touch ---- */
+  function nodeAt(cx, cy) {
     let closest = null, minD = Infinity;
     CONST_NODES.forEach(node => {
       const { x, y } = nodePos(node);
-      const d = Math.hypot(mx - x, my - y);
-      if (d < nodeRadius(node) * 2.8 + 16 && d < minD) { minD = d; closest = node; }
+      const d = Math.hypot(cx - x, cy - y);
+      const hitR = nodeRadius(node) * 3 + 14;
+      if (d < hitR && d < minD) { minD = d; closest = node; }
     });
-    hoverNodeId = closest?.id ?? null;
-    if (closest && tooltip) {
-      tooltip.textContent = closest.label + ' — ' + (DOMAIN_META[closest.domain]?.label || '');
-      tooltip.style.left = (mx + 14) + 'px';
-      tooltip.style.top  = (my - 12) + 'px';
-      tooltip.style.opacity = '1';
+    return closest;
+  }
+
+  /* ---- mouse move ---- */
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const node = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+    hoverNodeId = node?.id ?? null;
+
+    if (node) {
+      if (tooltip) {
+        tooltip.textContent = node.label;
+        tooltip.style.left    = (e.clientX - rect.left + 14) + 'px';
+        tooltip.style.top     = (e.clientY - rect.top  - 12) + 'px';
+        tooltip.style.opacity = '1';
+      }
       canvas.style.cursor = 'pointer';
-    } else if (tooltip) {
-      tooltip.style.opacity = '0';
+      if (!selectedNodeId) updateInfoPanel(node);
+    } else {
+      if (tooltip) tooltip.style.opacity = '0';
       canvas.style.cursor = 'default';
+      if (!selectedNodeId) updateInfoPanel(null);
     }
   });
 
   canvas.addEventListener('mouseleave', () => {
     hoverNodeId = null;
     if (tooltip) tooltip.style.opacity = '0';
+    if (!selectedNodeId) updateInfoPanel(null);
   });
 
+  /* ---- click to lock / deselect ---- */
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const node = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+    if (node) {
+      selectedNodeId = (selectedNodeId === node.id) ? null : node.id;
+      updateInfoPanel(selectedNodeId ? node : null);
+    } else {
+      selectedNodeId = null;
+      updateInfoPanel(null);
+    }
+  });
+
+  /* ---- touch support (mobile) ---- */
+  let touchNode = null;
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const rect  = canvas.getBoundingClientRect();
+    const t     = e.touches[0];
+    touchNode   = nodeAt(t.clientX - rect.left, t.clientY - rect.top);
+    if (touchNode) {
+      hoverNodeId = touchNode.id;
+      if (!selectedNodeId) updateInfoPanel(touchNode);
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    if (touchNode) {
+      selectedNodeId = (selectedNodeId === touchNode.id) ? null : touchNode.id;
+      hoverNodeId    = selectedNodeId;
+      updateInfoPanel(selectedNodeId ? touchNode : null);
+      touchNode = null;
+    }
+  }, { passive: false });
+
+  /* ---- legend ---- */
   if (legendEl) {
     legendEl.innerHTML = Object.entries(DOMAIN_META).map(([, m]) =>
       `<span class="flex items-center gap-1.5 font-mono text-xs text-paper-600">
-        <span class="w-2.5 h-2.5 rounded-full" style="background:${m.color}"></span>${m.label}
+        <span class="w-2 h-2 rounded-full" style="background:${m.color}"></span>${m.label}
       </span>`
     ).join('');
   }
 
+  /* ---- IntersectionObserver: only animate when visible ---- */
+  const visObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      animating = entry.isIntersecting;
+      if (animating && !rafId) rafId = requestAnimationFrame(draw);
+    });
+  }, { threshold: 0.1 });
+  visObserver.observe(canvas);
+
   resize();
   window.addEventListener('resize', resize);
-  draw();
 }
 
 /* ==========================================================================

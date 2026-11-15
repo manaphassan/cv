@@ -569,12 +569,21 @@
       <div class="mb-6">
         <span class="editorial-tag">[SKILL MAP &middot; INTERACTIVE CONSTELLATION]</span>
         <h2 class="font-extrabold text-2xl sm:text-3xl text-paper-950 mt-1">Skill Constellation</h2>
-        <p class="font-mono text-xs text-paper-500 mt-1">Hover nodes to explore connections across disciplines &mdash; desktop.</p>
+        <p class="font-mono text-xs text-paper-500 mt-1">Hover or tap a node to explore connections &mdash; click to lock selection.</p>
       </div>
       <div class="flex flex-wrap gap-x-5 gap-y-2 mb-5" id="constellation-legend"></div>
-      <div class="relative rounded-2xl border border-paper-200 overflow-hidden bg-paper-50" style="height:390px" id="constellation-wrap">
+      <div class="relative rounded-2xl border border-paper-200 overflow-hidden bg-paper-50" style="height:420px" id="constellation-wrap">
         <canvas id="skill-constellation" class="absolute inset-0"></canvas>
-        <div id="constellation-tooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-150 bg-paper-950 text-white font-mono text-xs px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap"></div>
+        <div id="constellation-tooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-150 bg-paper-950 font-mono text-xs px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap" style="color:rgb(var(--paper-50))"></div>
+      </div>
+      <!-- Persistent info panel -->
+      <div id="constellation-info" class="mt-4 h-12 flex items-center gap-4 font-mono opacity-0 transition-opacity duration-200">
+        <div id="cst-dot" class="w-3 h-3 rounded-full shrink-0 transition-all"></div>
+        <div class="flex-1 min-w-0">
+          <p id="cst-name" class="text-sm font-bold text-paper-950 truncate"></p>
+          <p id="cst-meta" class="text-xs text-paper-500 mt-0.5"></p>
+        </div>
+        <p id="cst-hint" class="text-xs text-paper-400 shrink-0"></p>
       </div>
     </section>
 
