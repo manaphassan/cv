@@ -86,7 +86,7 @@ export const toolsAndSoftware = [
   {
     category: "Development & No-Code",
     tools: [
-      "React (Mobile Apps)", "NocoBase",
+      "React (Mobile Apps)", "Svelte", "NocoBase",
       "HTML5", "CSS3", "Tailwind CSS", "JavaScript",
       "Vite", "Git", "GitHub Actions"
     ]
