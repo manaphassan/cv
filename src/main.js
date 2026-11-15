@@ -1,30 +1,10 @@
 import { 
   createIcons, 
-  Search, 
-  FileText, 
-  ArrowDownRight, 
-  Play, 
-  Github, 
-  Youtube, 
-  ExternalLink, 
-  Printer, 
-  X, 
-  Check, 
-  Copy, 
-  Award, 
-  Layers, 
-  Briefcase, 
-  Cpu, 
-  Code, 
-  Clock, 
-  ShieldCheck, 
-  Handshake, 
-  Terminal, 
-  Globe, 
-  Linkedin, 
-  Palette,
-  Contact,
-  Download
+  Search, FileText, ArrowDownRight, Play, Github, Youtube,
+  ExternalLink, Printer, X, Check, Copy, Award, Layers,
+  Briefcase, Cpu, Code, Clock, ShieldCheck, Handshake, Terminal,
+  Globe, Linkedin, Palette, Contact, Download,
+  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal
 } from 'lucide';
 import confetti from 'canvas-confetti';
 import { careerEras, executiveMetrics } from './data/career.js';
@@ -36,7 +16,8 @@ const icons = {
   Search, FileText, ArrowDownRight, Play, Github, Youtube,
   ExternalLink, Printer, X, Check, Copy, Award, Layers,
   Briefcase, Cpu, Code, Clock, ShieldCheck, Handshake, Terminal,
-  Globe, Linkedin, Palette, Contact, Download
+  Globe, Linkedin, Palette, Contact, Download,
+  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal
 };
 
 function refreshIcons() {
@@ -44,7 +25,7 @@ function refreshIcons() {
 }
 
 /* ==========================================================================
-   1. HERO METRICS (READABLE SWISS TYPOGRAPHY)
+   1. HERO METRICS (READABLE SWISS TYPOGRAPHY + COUNT-UP)
    ========================================================================== */
 function renderHeroMetrics() {
   const container = document.getElementById('hero-metrics-grid');
@@ -56,7 +37,9 @@ function renderHeroMetrics() {
         [0${idx + 1}]
       </span>
       <div>
-        <div class="font-display font-extrabold text-2xl sm:text-3xl text-paper-950 tracking-tight leading-none mb-1">
+        <div
+          class="metric-value font-display font-extrabold text-2xl sm:text-3xl text-paper-950 tracking-tight leading-none mb-1"
+          data-countup="${m.value}">
           ${m.value}
         </div>
         <p class="font-mono text-xs font-bold text-paper-900 leading-tight">${m.label}</p>
@@ -64,6 +47,38 @@ function renderHeroMetrics() {
       </div>
     </div>
   `).join('');
+}
+
+function initCountUpMetrics() {
+  const metricEls = document.querySelectorAll('.metric-value[data-countup]');
+  if (!metricEls.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      const el = entry.target;
+      const raw = el.getAttribute('data-countup');
+      const match = raw.match(/^(\D*)(\d+)(\D*)$/);
+      if (!match) return;
+      const [, prefix, numStr, suffix] = match;
+      const target = parseInt(numStr, 10);
+      const padded = numStr.length > 1 && numStr.startsWith('0');
+      const duration = 1100;
+      const start = performance.now();
+      function update(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const cur = Math.round(eased * target);
+        const display = padded ? String(cur).padStart(numStr.length, '0') : String(cur);
+        el.textContent = prefix + display + suffix;
+        if (p < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }, { threshold: 0.5 });
+
+  metricEls.forEach(el => observer.observe(el));
 }
 
 /* ==========================================================================
@@ -141,6 +156,8 @@ function renderProjectCard(p) {
   `;
 }
 
+const SHOW_MORE_THRESHOLD = 6;
+
 function renderActProjects() {
   const acts = [1, 3, 4, 5];
   acts.forEach(actNum => {
@@ -148,14 +165,40 @@ function renderActProjects() {
     if (!container) return;
 
     const actProjects = projects.filter(p => p.act === actNum);
-    container.innerHTML = actProjects.map(p => renderProjectCard(p)).join('');
 
-    container.querySelectorAll('.story-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        // If they clicked on a link, don't open modal
-        if (e.target.closest('a')) return;
-        openLightbox(card.getAttribute('data-id'));
+    // For large acts (Act 03 has 11 projects), show first N with a show-more toggle
+    const shouldCollapse = actProjects.length > SHOW_MORE_THRESHOLD;
+    const visible = shouldCollapse ? actProjects.slice(0, SHOW_MORE_THRESHOLD) : actProjects;
+    const hidden = shouldCollapse ? actProjects.slice(SHOW_MORE_THRESHOLD) : [];
+
+    container.innerHTML = visible.map(p => renderProjectCard(p)).join('');
+
+    if (shouldCollapse) {
+      container.insertAdjacentHTML('afterend', `
+        <div id="show-more-act-${actNum}" class="mt-6 text-center">
+          <button class="show-more-btn px-6 py-2.5 rounded-xl border border-paper-300 font-mono text-xs font-bold text-paper-700 hover:bg-paper-100 hover:border-paper-500 transition-all inline-flex items-center gap-2">
+            <span>Show all ${actProjects.length} projects</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      `);
+      const showMoreWrap = document.getElementById(`show-more-act-${actNum}`);
+      showMoreWrap?.querySelector('.show-more-btn')?.addEventListener('click', () => {
+        container.insertAdjacentHTML('beforeend', hidden.map(p => renderProjectCard(p)).join(''));
+        showMoreWrap.remove();
+        // Re-apply active discipline filter to newly added cards
+        const activeBtn = document.querySelector('.filter-discipline-btn.font-bold');
+        if (activeBtn) activeBtn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        refreshIcons();
       });
+    }
+
+    // Event delegation — handles both initial + show-more cards
+    container.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      const card = e.target.closest('.story-card');
+      if (!card) return;
+      openLightbox(card.getAttribute('data-id'));
     });
   });
 
@@ -168,6 +211,7 @@ function renderActProjects() {
 function initScrollObserver() {
   const chapters = document.querySelectorAll('.story-chapter');
   const navPills = document.querySelectorAll('.act-nav-pill');
+  const mobilePills = document.querySelectorAll('.mobile-act-pill');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -175,12 +219,16 @@ function initScrollObserver() {
         entry.target.classList.add('is-revealed');
         
         const id = entry.target.getAttribute('id');
+        const activeClass = 'act-nav-pill px-3.5 py-1.5 rounded-lg border border-paper-950 bg-paper-950 text-white font-bold transition-all shadow-sm';
+        const inactiveClass = 'act-nav-pill px-3.5 py-1.5 rounded-lg border border-paper-200 text-paper-700 hover:text-paper-950 hover:border-paper-400 transition-all font-medium';
+        const mobileActive = 'mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-950 bg-paper-950 text-white font-mono text-[10px] font-bold';
+        const mobileInactive = 'mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-200 text-paper-700 font-mono text-[10px] font-bold';
+
         navPills.forEach(pill => {
-          if (pill.getAttribute('href') === `#${id}`) {
-            pill.className = 'act-nav-pill px-3.5 py-1.5 rounded-lg border border-paper-950 bg-paper-950 text-white font-bold transition-all shadow-sm';
-          } else {
-            pill.className = 'act-nav-pill px-3.5 py-1.5 rounded-lg border border-paper-200 text-paper-700 hover:text-paper-950 hover:border-paper-400 transition-all font-medium';
-          }
+          pill.className = pill.getAttribute('href') === `#${id}` ? activeClass : inactiveClass;
+        });
+        mobilePills.forEach(pill => {
+          pill.className = pill.getAttribute('href') === `#${id}` ? mobileActive : mobileInactive;
         });
       }
     });
@@ -193,8 +241,26 @@ function initScrollObserver() {
 }
 
 /* ==========================================================================
-   4. LIGHTBOX DIALOG
+   4. LIGHTBOX DIALOG (with gallery nav state)
    ========================================================================== */
+let lbGallery = [];
+let lbIndex = 0;
+
+function navigateLightbox(dir) {
+  if (lbGallery.length <= 1) return;
+  lbIndex = (lbIndex + dir + lbGallery.length) % lbGallery.length;
+  const img = document.getElementById('lb-main-image');
+  if (img) img.src = encodeURI(lbGallery[lbIndex]);
+  // Sync thumbnail highlight
+  document.querySelectorAll('.lb-thumb-btn').forEach((btn, i) => {
+    btn.className = i === lbIndex
+      ? 'lb-thumb-btn w-16 h-16 rounded-lg overflow-hidden border-2 border-paper-950 shrink-0'
+      : 'lb-thumb-btn w-16 h-16 rounded-lg overflow-hidden border-2 border-paper-200 shrink-0 hover:border-paper-950 transition-all';
+  });
+  // Scroll active thumb into view
+  document.querySelectorAll('.lb-thumb-btn')[lbIndex]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+}
+
 function openLightbox(projectId) {
   const p = projects.find(item => item.id === projectId);
   if (!p) return;
@@ -244,21 +310,34 @@ function openLightbox(projectId) {
   }
 
   const images = p.gallery && p.gallery.length > 0 ? p.gallery : [p.image];
+  lbGallery = images;
+  lbIndex = 0;
+
+  lbMainImage.src = encodeURI(images[0]);
+
   lbThumbnails.innerHTML = images.map((img, idx) => `
     <button 
       class="lb-thumb-btn w-16 h-16 rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-paper-950' : 'border-paper-200'} shrink-0 hover:border-paper-950 transition-all"
-      data-img="${img}">
-      <img src="${encodeURI(img)}" class="w-full h-full object-cover" alt="" onerror="this.src='mywork/02-commercial-print-posm/billboards-outdoor/billboard-display-highway.jpg';" />
+      data-img="${img}" data-idx="${idx}">
+      <img src="${encodeURI(img)}" class="w-full h-full object-cover" alt="" loading="lazy" onerror="this.src='mywork/02-commercial-print-posm/billboards-outdoor/billboard-display-highway.jpg';" />
     </button>
   `).join('');
 
   lbThumbnails.querySelectorAll('.lb-thumb-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      lbIndex = parseInt(btn.getAttribute('data-idx'), 10);
       lbThumbnails.querySelectorAll('.lb-thumb-btn').forEach(b => b.className = 'lb-thumb-btn w-16 h-16 rounded-lg overflow-hidden border-2 border-paper-200 shrink-0 hover:border-paper-950 transition-all');
       btn.className = 'lb-thumb-btn w-16 h-16 rounded-lg overflow-hidden border-2 border-paper-950 shrink-0';
       lbMainImage.src = encodeURI(btn.getAttribute('data-img'));
     });
   });
+
+  // Show/hide nav buttons
+  const prevBtn = document.getElementById('lb-prev');
+  const nextBtn = document.getElementById('lb-next');
+  const hasMultiple = images.length > 1;
+  if (prevBtn) prevBtn.classList.toggle('hidden', !hasMultiple);
+  if (nextBtn) nextBtn.classList.toggle('hidden', !hasMultiple);
 
   dialog.showModal();
   refreshIcons();
@@ -376,11 +455,29 @@ function initAppcableBrandShowcase() {
 }
 
 /* ==========================================================================
-   DISCIPLINE FILTER SYSTEM
+   DISCIPLINE FILTER SYSTEM (with count badges)
    ========================================================================== */
 function initDisciplineFilter() {
   const filterBtns = document.querySelectorAll('.filter-discipline-btn');
   if (!filterBtns.length) return;
+
+  // Build category counts from projects data
+  const counts = { all: projects.length };
+  projects.forEach(p => {
+    const c = p.category;
+    if (c === 'product-ux') counts['product-ux'] = (counts['product-ux'] || 0) + 1;
+    else if (c === 'brand-corp' || c === 'branding') counts['brand-corp'] = (counts['brand-corp'] || 0) + 1;
+    else if (c === 'print-posm' || c === 'commercial-posm') counts['commercial-posm'] = (counts['commercial-posm'] || 0) + 1;
+    else if (c === 'ai-systems' || c === 'broadcast-video' || c === 'media-motion') counts['creative-tech'] = (counts['creative-tech'] || 0) + 1;
+  });
+
+  filterBtns.forEach(btn => {
+    const disc = btn.getAttribute('data-discipline');
+    const count = counts[disc];
+    if (count !== undefined) {
+      btn.innerHTML = `${btn.textContent.trim()} <span class="font-normal opacity-60">(${count})</span>`;
+    }
+  });
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -396,7 +493,6 @@ function initDisciplineFilter() {
         const cat = card.getAttribute('data-category');
         if (discipline === 'all') {
           card.classList.remove('hidden');
-          card.style.opacity = '1';
         } else if (
           (discipline === 'product-ux' && cat === 'product-ux') ||
           (discipline === 'brand-corp' && (cat === 'brand-corp' || cat === 'branding')) ||
@@ -404,7 +500,6 @@ function initDisciplineFilter() {
           (discipline === 'creative-tech' && (cat === 'ai-systems' || cat === 'broadcast-video' || cat === 'media-motion'))
         ) {
           card.classList.remove('hidden');
-          card.style.opacity = '1';
         } else {
           card.classList.add('hidden');
         }
@@ -763,9 +858,88 @@ function initDynamicYears() {
 /* ==========================================================================
    INITIALIZATION
    ========================================================================== */
+
+/* ==========================================================================
+   NEW: LIGHTBOX KEYBOARD & TOUCH SWIPE NAVIGATION
+   ========================================================================== */
+function initLightboxNavigation() {
+  const dialog = document.getElementById('lightbox-dialog');
+  if (!dialog) return;
+
+  // Keyboard: arrow keys navigate gallery
+  window.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+    else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  });
+
+  // Prev / Next button clicks
+  document.getElementById('lb-prev')?.addEventListener('click', () => navigateLightbox(-1));
+  document.getElementById('lb-next')?.addEventListener('click', () => navigateLightbox(1));
+
+  // Touch swipe on the image container
+  const imageWrap = document.getElementById('lb-image-container');
+  if (imageWrap) {
+    let touchStartX = 0;
+    imageWrap.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    imageWrap.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 48) navigateLightbox(diff > 0 ? 1 : -1);
+    }, { passive: true });
+  }
+}
+
+/* ==========================================================================
+   NEW: SCROLL-TO-TOP FAB
+   ========================================================================== */
+function initScrollToTop() {
+  const btn = document.getElementById('btn-scroll-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+/* ==========================================================================
+   NEW: DARK MODE TOGGLE
+   ========================================================================== */
+function initDarkMode() {
+  const html = document.documentElement;
+  const btn = document.getElementById('btn-dark-mode');
+  if (!btn) return;
+
+  const moon = btn.querySelector('[data-lucide="moon"]');
+  const sun  = btn.querySelector('[data-lucide="sun"]');
+
+  function applyTheme(dark) {
+    html.classList.toggle('dark', dark);
+    moon?.classList.toggle('hidden', dark);
+    sun?.classList.toggle('hidden', !dark);
+  }
+
+  // Respect saved preference, then OS preference
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    applyTheme(saved === 'dark');
+  } else {
+    applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+
+  btn.addEventListener('click', () => {
+    const isDark = !html.classList.contains('dark');
+    applyTheme(isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initDarkMode();
   initDynamicYears();
   renderHeroMetrics();
+  initCountUpMetrics();
   renderActProjects();
   initDisciplineFilter();
   initAppcableBrandShowcase();
@@ -775,5 +949,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgressAndTimelineSpine();
   initCommandPalette();
   initResumeAndContact();
+  initLightboxNavigation();
+  initScrollToTop();
   refreshIcons();
 });

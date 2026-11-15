@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES — PAPER SCALE & ACCENT (ENABLES DARK MODE FLIP)
+   ========================================================================== */
+:root {
+  --paper-50:  255 255 255;
+  --paper-100: 248 250 252;
+  --paper-150: 241 245 249;
+  --paper-200: 226 232 240;
+  --paper-300: 203 213 225;
+  --paper-400: 148 163 184;
+  --paper-500: 100 116 139;
+  --paper-600: 71 85 105;
+  --paper-700: 51 65 85;
+  --paper-800: 30 41 59;
+  --paper-900: 15 23 42;
+  --paper-950: 2 6 23;
+  --accent-blue: 29 78 216;
+}
+
+html.dark {
+  color-scheme: dark;
+  --paper-50:  2 6 23;
+  --paper-100: 10 15 30;
+  --paper-150: 15 23 42;
+  --paper-200: 30 41 59;
+  --paper-300: 51 65 85;
+  --paper-400: 71 85 105;
+  --paper-500: 100 116 139;
+  --paper-600: 148 163 184;
+  --paper-700: 203 213 225;
+  --paper-800: 226 232 240;
+  --paper-900: 241 245 249;
+  --paper-950: 255 255 255;
+  --accent-blue: 96 165 250;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -110,7 +146,14 @@
 .story-chapter.is-revealed .story-card:nth-child(1) { animation-delay: 0.06s; }
 .story-chapter.is-revealed .story-card:nth-child(2) { animation-delay: 0.14s; }
 .story-chapter.is-revealed .story-card:nth-child(3) { animation-delay: 0.22s; }
-.story-chapter.is-revealed .story-card:nth-child(4) { animation-delay: 0.30s; }
+.story-chapter.is-revealed .story-card:nth-child(4)  { animation-delay: 0.30s; }
+.story-chapter.is-revealed .story-card:nth-child(5)  { animation-delay: 0.38s; }
+.story-chapter.is-revealed .story-card:nth-child(6)  { animation-delay: 0.44s; }
+.story-chapter.is-revealed .story-card:nth-child(7)  { animation-delay: 0.50s; }
+.story-chapter.is-revealed .story-card:nth-child(8)  { animation-delay: 0.56s; }
+.story-chapter.is-revealed .story-card:nth-child(9)  { animation-delay: 0.60s; }
+.story-chapter.is-revealed .story-card:nth-child(10) { animation-delay: 0.64s; }
+.story-chapter.is-revealed .story-card:nth-child(11) { animation-delay: 0.68s; }
 
 @keyframes cardReveal {
   from {
@@ -127,6 +170,60 @@
   animation: pulseGlow 3s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   DARK MODE OVERRIDES (bg-white & hardcoded values)
+   ========================================================================== */
+
+html.dark body,
+html.dark .bg-white { background-color: rgb(var(--paper-50)); }
+
+html.dark .hover\:bg-white:hover { background-color: rgb(var(--paper-100)); }
+
+html.dark header {
+  background-color: rgb(var(--paper-50) / 0.97) !important;
+  border-color: rgb(var(--paper-200)) !important;
+}
+
+html.dark nav#story-nav-strip {
+  background-color: rgb(var(--paper-50) / 0.97) !important;
+  border-color: rgb(var(--paper-200)) !important;
+}
+
+html.dark #lightbox-dialog > div,
+html.dark #resume-dialog > div,
+html.dark #cmd-dialog > div {
+  background-color: rgb(var(--paper-100)) !important;
+  border-color: rgb(var(--paper-200)) !important;
+}
+
+html.dark .timeline-node.is-active {
+  background-color: rgb(var(--paper-950)) !important;
+  color: rgb(var(--paper-50)) !important;
+  border-color: rgb(var(--paper-950)) !important;
+  box-shadow: 0 0 0 5px rgb(var(--paper-950) / 0.12), 0 6px 16px rgb(var(--paper-950) / 0.16);
+}
+
+html.dark dialog::backdrop {
+  background: rgb(var(--paper-900) / 0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* Scroll-to-Top FAB */
+#btn-scroll-top {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#btn-scroll-top.visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0);
+}
+#btn-scroll-top:not(.visible) {
+  transform: translateY(8px);
+}
+
+/* Mobile chapter pills active state sync'd by JS */
+.mobile-act-pill { transition: all 0.2s ease; }
+
 /* Custom Clean Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -142,6 +239,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
 }
+html.dark ::-webkit-scrollbar-track { background: #0F172A; }
+html.dark ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+html.dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
 dialog::backdrop {
   background: rgba(15, 23, 42, 0.65);

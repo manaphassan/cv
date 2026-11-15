@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Harussani Manaphassan — Brand Systems Architect & Creative Director</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23020617'/><text x='16' y='22' text-anchor='middle' font-family='monospace' font-size='13' font-weight='bold' fill='white'>HM</text></svg>" />
   
   <!-- SEO -->
   <meta name="description" content="Portfolio of Harussani Manaphassan: Creative Direction, Brand Systems, and Product Design." />
@@ -69,6 +70,10 @@
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-2">
+        <button id="btn-dark-mode" class="p-2.5 rounded-xl border border-paper-200 text-paper-700 hover:text-paper-950 hover:bg-paper-100 transition-all" title="Toggle dark mode" aria-label="Toggle dark mode">
+          <i data-lucide="moon" class="w-4 h-4"></i>
+          <i data-lucide="sun" class="w-4 h-4 hidden"></i>
+        </button>
         <button id="btn-cmd-palette" class="p-2.5 rounded-xl border border-paper-200 text-paper-700 hover:text-paper-950 hover:bg-paper-100 transition-all" title="Search Story (Ctrl+K)">
           <i data-lucide="search" class="w-4 h-4"></i>
         </button>
@@ -140,11 +145,11 @@
           <span>Jump to Act 05 (Present)</span>
           <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
         </a>
-        <a href="https://www.linkedin.com/in/manaphassan" target="_blank" rel="noreferrer" class="px-4 py-3 rounded-xl border border-paper-200 text-paper-700 font-mono text-xs uppercase tracking-wider hover:text-paper-950 hover:border-paper-400 transition-all flex items-center gap-2">
+        <a href="https://www.linkedin.com/in/manaphassan" target="_blank" rel="noreferrer" class="hidden sm:flex px-4 py-3 rounded-xl border border-paper-200 text-paper-700 font-mono text-xs uppercase tracking-wider hover:text-paper-950 hover:border-paper-400 transition-all items-center gap-2">
           <i data-lucide="linkedin" class="w-4 h-4 text-accent-blue"></i>
           <span>LinkedIn</span>
         </a>
-        <a href="https://www.behance.net/manaphassan" target="_blank" rel="noreferrer" class="px-4 py-3 rounded-xl border border-paper-200 text-paper-700 font-mono text-xs uppercase tracking-wider hover:text-paper-950 hover:border-paper-400 transition-all flex items-center gap-2">
+        <a href="https://www.behance.net/manaphassan" target="_blank" rel="noreferrer" class="hidden sm:flex px-4 py-3 rounded-xl border border-paper-200 text-paper-700 font-mono text-xs uppercase tracking-wider hover:text-paper-950 hover:border-paper-400 transition-all items-center gap-2">
           <i data-lucide="palette" class="w-4 h-4 text-accent-blue"></i>
           <span>Behance</span>
         </a>
@@ -153,8 +158,20 @@
     </section>
 
     <!-- STICKY STORY CHAPTER PROGRESS BAR & DISCIPLINE FILTER -->
-    <nav class="py-3 border-b border-paper-200 sticky top-18 z-30 bg-white/95 backdrop-blur-md space-y-2.5" id="story-nav-strip">
-      <div class="flex items-center justify-between overflow-x-auto gap-2 text-xs font-mono py-0.5">
+    <nav class="py-2 sm:py-3 border-b border-paper-200 sticky top-18 z-30 bg-white/95 backdrop-blur-md space-y-2" id="story-nav-strip">
+
+      <!-- Mobile-only: compact numbered act pills -->
+      <div class="sm:hidden flex items-center gap-1.5" id="mobile-act-nav">
+        <span class="font-mono text-[10px] text-paper-500 uppercase font-bold shrink-0">ACT:</span>
+        <a href="#act-01" class="mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-200 text-paper-700 font-mono text-[10px] font-bold">01</a>
+        <a href="#act-02" class="mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-200 text-paper-700 font-mono text-[10px] font-bold">02</a>
+        <a href="#act-03" class="mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-200 text-paper-700 font-mono text-[10px] font-bold">03</a>
+        <a href="#act-04" class="mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-200 text-paper-700 font-mono text-[10px] font-bold">04</a>
+        <a href="#act-05" class="mobile-act-pill flex-1 text-center py-1.5 rounded-lg border border-paper-950 bg-paper-950 text-white font-mono text-[10px] font-bold">05</a>
+      </div>
+
+      <!-- Desktop: full chapter labels -->
+      <div class="hidden sm:flex items-center justify-between overflow-x-auto gap-2 text-xs font-mono py-0.5">
         <span class="text-paper-500 uppercase tracking-wider font-bold shrink-0 mr-2 hidden sm:inline">CAREER CHAPTERS:</span>
         <div class="flex items-center gap-2 shrink-0" id="story-act-pills">
           <a href="#act-01" class="act-nav-pill px-3.5 py-1.5 rounded-lg border border-paper-200 text-paper-700 hover:text-paper-950 hover:border-paper-400 transition-all font-medium">
@@ -532,6 +549,10 @@
             <i data-lucide="contact" class="w-4 h-4 text-accent-blue"></i>
             <span id="save-vcard-label">Save vCard (.vcf)</span>
           </button>
+          <a href="mailto:harussani.manaphassan@gmail.com" class="px-6 py-3.5 rounded-xl border border-paper-300 bg-white text-paper-900 font-mono text-xs uppercase tracking-wider font-bold hover:bg-paper-100 transition-all flex items-center gap-2 shadow-2xs">
+            <i data-lucide="mail" class="w-4 h-4 text-accent-blue"></i>
+            <span>Send Email</span>
+          </a>
         </div>
 
         <div class="mt-8 pt-6 border-t border-paper-200 flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-paper-600">
@@ -559,6 +580,11 @@
 
   </main>
 
+  <!-- SCROLL-TO-TOP FAB -->
+  <button id="btn-scroll-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-paper-950 text-white shadow-xl opacity-0 pointer-events-none hover:bg-paper-800 transition-all" title="Back to top" aria-label="Scroll to top">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
   <!-- MINIMAL FOOTER (SINGLE LINE) -->
   <footer class="border-t border-paper-200 bg-white py-8 font-mono text-xs text-paper-600 text-center">
     <div class="w-full px-4 sm:px-8">
@@ -582,8 +608,14 @@
         </button>
       </div>
 
-      <div class="rounded-xl overflow-hidden bg-paper-100 border border-paper-200 mb-6 max-h-[500px] flex items-center justify-center">
-        <img id="lb-main-image" src="" alt="" class="max-h-[500px] w-auto object-contain" />
+      <div class="rounded-xl overflow-hidden bg-paper-100 border border-paper-200 mb-6 relative" id="lb-image-container">
+        <img id="lb-main-image" src="" alt="" class="max-h-[480px] w-full object-contain" />
+        <button id="lb-prev" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-paper-950/75 text-white hover:bg-paper-950 transition-all shadow-lg" title="Previous (←)" aria-label="Previous image">
+          <i data-lucide="chevron-left" class="w-5 h-5"></i>
+        </button>
+        <button id="lb-next" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-paper-950/75 text-white hover:bg-paper-950 transition-all shadow-lg" title="Next (→)" aria-label="Next image">
+          <i data-lucide="chevron-right" class="w-5 h-5"></i>
+        </button>
       </div>
 
       <div id="lb-thumbnails" class="flex gap-2 overflow-x-auto pb-4 mb-6"></div>
