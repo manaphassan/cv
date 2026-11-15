@@ -131,12 +131,14 @@ html.dark {
 }
 
 .story-card {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
+/* Hover shadow only — translateY removed (replaced by JS 3D tilt) */
 .story-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px -10px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 14px 30px -10px rgba(15, 23, 42, 0.1);
 }
 
 /* Staggered card reveal on act activation */

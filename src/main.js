@@ -250,7 +250,16 @@ function navigateLightbox(dir) {
   if (lbGallery.length <= 1) return;
   lbIndex = (lbIndex + dir + lbGallery.length) % lbGallery.length;
   const img = document.getElementById('lb-main-image');
-  if (img) img.src = encodeURI(lbGallery[lbIndex]);
+  if (!img) return;
+
+  // Crossfade: fade out → swap src → fade in
+  img.style.transition = 'opacity 0.15s ease';
+  img.style.opacity = '0';
+  setTimeout(() => {
+    img.src = encodeURI(lbGallery[lbIndex]);
+    img.style.opacity = '1';
+  }, 150);
+
   // Sync thumbnail highlight
   document.querySelectorAll('.lb-thumb-btn').forEach((btn, i) => {
     btn.className = i === lbIndex
@@ -491,17 +500,24 @@ function initDisciplineFilter() {
       const cards = document.querySelectorAll('.story-card');
       cards.forEach(card => {
         const cat = card.getAttribute('data-category');
-        if (discipline === 'all') {
-          card.classList.remove('hidden');
-        } else if (
-          (discipline === 'product-ux' && cat === 'product-ux') ||
-          (discipline === 'brand-corp' && (cat === 'brand-corp' || cat === 'branding')) ||
+        const shouldShow = discipline === 'all' ||
+          (discipline === 'product-ux'      && cat === 'product-ux') ||
+          (discipline === 'brand-corp'      && (cat === 'brand-corp' || cat === 'branding')) ||
           (discipline === 'commercial-posm' && (cat === 'commercial-posm' || cat === 'print-posm')) ||
-          (discipline === 'creative-tech' && (cat === 'ai-systems' || cat === 'broadcast-video' || cat === 'media-motion'))
-        ) {
+          (discipline === 'creative-tech'   && (cat === 'ai-systems' || cat === 'broadcast-video' || cat === 'media-motion'));
+
+        if (shouldShow) {
+          // Cancel any pending hide timer
+          if (card._filterTimer) { clearTimeout(card._filterTimer); delete card._filterTimer; }
           card.classList.remove('hidden');
+          // Double rAF ensures the display change is committed before the transition fires
+          requestAnimationFrame(() => requestAnimationFrame(() => { card.style.opacity = '1'; }));
         } else {
-          card.classList.add('hidden');
+          card.style.opacity = '0';
+          card._filterTimer = setTimeout(() => {
+            card.classList.add('hidden');
+            card.style.opacity = '';
+          }, 220);
         }
       });
     });
@@ -889,6 +905,14 @@ function initLightboxNavigation() {
   // Prev / Next button clicks
   document.getElementById('lb-prev')?.addEventListener('click', () => navigateLightbox(-1));
   document.getElementById('lb-next')?.addEventListener('click', () => navigateLightbox(1));
+
+  // Backdrop click — close any open dialog
+  [dialog,
+   document.getElementById('resume-dialog'),
+   document.getElementById('cmd-dialog')
+  ].forEach(d => {
+    d?.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+  });
 
   // Touch swipe on the image container
   const imageWrap = document.getElementById('lb-image-container');
