@@ -762,7 +762,7 @@ function initResumeAndContact() {
       'TITLE:Head of Creative · Brand Systems Architect',
       'ORG:SuamiSihat · Appcable',
       'EMAIL;TYPE=INTERNET;TYPE=WORK:harussani.manaphassan@gmail.com',
-      'URL:https://manaphassan.github.io/manaphassan_portfolio/',
+      'URL:https://manaphassan.github.io/cv/',
       'URL;TYPE=LinkedIn:https://www.linkedin.com/in/manaphassan',
       'URL;TYPE=Behance:https://www.behance.net/manaphassan',
       'URL;TYPE=GitHub:https://github.com/manaphassan',

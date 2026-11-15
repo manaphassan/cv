@@ -2,7 +2,7 @@
 
 > **Head of Creative · Brand Systems Architect**  
 > *Banting • Cyberjaya • Shah Alam, Malaysia*  
-> 🌐 **Live Portfolio:** [https://manaphassan.github.io/manaphassan_portfolio/](https://manaphassan.github.io/manaphassan_portfolio/)
+> 🌐 **Live Portfolio:** [https://manaphassan.github.io/cv/](https://manaphassan.github.io/cv/)
 
 ---
 
@@ -82,7 +82,7 @@ npm run preview
 
 ## 📬 Connect
 
-- **Live Portfolio:** [https://manaphassan.github.io/manaphassan_portfolio/](https://manaphassan.github.io/manaphassan_portfolio/)
+- **Live Portfolio:** [https://manaphassan.github.io/cv/](https://manaphassan.github.io/cv/)
 - **LinkedIn:** [linkedin.com/in/manaphassan](https://www.linkedin.com/in/manaphassan)
 - **Behance:** [behance.net/manaphassan](https://www.behance.net/manaphassan)
 - **GitHub:** [github.com/manaphassan](https://github.com/manaphassan)
