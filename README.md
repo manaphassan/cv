@@ -164,6 +164,8 @@ Change `status` and push — the badge updates within minutes via GitHub Actions
 | 🎨 Behance | [behance.net/manaphassan](https://www.behance.net/manaphassan) |
 | 🐙 GitHub | [github.com/manaphassan](https://github.com/manaphassan) |
 | 📧 Email | [manaphassan@gmail.com](mailto:manaphassan@gmail.com) |
+| 📱 Phone | [+60 10-265 7097](tel:+60102657097) |
+| 💳 Digital Card | [manaphassan.github.io/cv/card.html](https://manaphassan.github.io/cv/card.html) |
 | 👤 Humans | [manaphassan.github.io/cv/humans.txt](https://manaphassan.github.io/cv/humans.txt) |
 
 ---

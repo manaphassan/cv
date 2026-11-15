@@ -1,23 +1,27 @@
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  // Relative base allows seamless hosting on GitHub pages under any subdirectory
   base: './',
   plugins: [
     viteStaticCopy({
-      targets: [
-        {
-          src: 'mywork',
-          dest: ''
-        }
-      ]
+      targets: [{ src: 'mywork', dest: '' }]
     })
   ],
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false
+    sourcemap: false,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        card: resolve(__dirname, 'card.html'),
+      }
+    }
   },
   server: {
     port: 3000,
