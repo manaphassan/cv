@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="https://manaphassan.github.io/cv/hm-logo.svg" width="80" height="80" alt="HM — Harussani Manaphassan" />
+
 # Harussani Manaphassan
 
 **Head of Creative · Brand Systems Architect · Product Designer**
