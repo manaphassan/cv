@@ -755,6 +755,19 @@ function initCommandPalette() {
 
   if (!dialog || !btn || !input || !results) return;
 
+  let currentList = [];
+  let selectedCmdIdx = -1;
+
+  function setSelected(idx) {
+    const rows = results.querySelectorAll('.cmd-row');
+    if (!rows.length) return;
+    selectedCmdIdx = ((idx % rows.length) + rows.length) % rows.length;
+    rows.forEach((row, i) => {
+      row.classList.toggle('bg-paper-100', i === selectedCmdIdx);
+      if (i === selectedCmdIdx) row.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
   const commands = [
     { title: "Download Executive CV (PDF)", cat: "Dossier", action: () => openResume() },
     { title: "WhatsApp +60 10-265 7097", cat: "Contact", action: () => window.open('https://wa.me/60102657097', '_blank') },
@@ -778,14 +791,15 @@ function initCommandPalette() {
 
   function renderMatches(q = '') {
     const query = q.toLowerCase().trim();
-    const list = query === '' ? commands.slice(0, 8) : commands.filter(c => c.title.toLowerCase().includes(query) || c.cat.toLowerCase().includes(query));
+    currentList = query === '' ? commands.slice(0, 8) : commands.filter(c => c.title.toLowerCase().includes(query) || c.cat.toLowerCase().includes(query));
+    selectedCmdIdx = -1;
 
-    if (list.length === 0) {
+    if (currentList.length === 0) {
       results.innerHTML = `<div class="p-4 text-center font-mono text-xs text-paper-500">[NO MATCHING RESULTS]</div>`;
       return;
     }
 
-    results.innerHTML = list.map((item, idx) => `
+    results.innerHTML = currentList.map((item, idx) => `
       <div 
         data-idx="${idx}"
         class="cmd-row p-3 rounded-lg hover:bg-paper-100 cursor-pointer flex items-center justify-between transition-colors">
@@ -798,7 +812,7 @@ function initCommandPalette() {
       row.addEventListener('click', () => {
         const idx = parseInt(row.getAttribute('data-idx'), 10);
         dialog.close();
-        list[idx].action();
+        currentList[idx].action();
       });
     });
   }
@@ -824,7 +838,22 @@ function initCommandPalette() {
     }
   });
 
-  input.addEventListener('input', (e) => renderMatches(e.target.value));
+  input.addEventListener('input', (e) => { renderMatches(e.target.value); });
+
+  input.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelected(selectedCmdIdx + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelected(selectedCmdIdx - 1);
+    } else if (e.key === 'Enter' && selectedCmdIdx >= 0) {
+      e.preventDefault();
+      dialog.close();
+      currentList[selectedCmdIdx]?.action();
+    }
+  });
 }
 
 /* ==========================================================================

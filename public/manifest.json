@@ -1,0 +1,34 @@
+{
+  "name": "Harussani Manaphassan — Portfolio & CV",
+  "short_name": "HM Portfolio",
+  "description": "Head of Creative · Brand Systems Architect — Interactive career portfolio and CV.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./hm-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["portfolio", "business"],
+  "shortcuts": [
+    {
+      "name": "Digital Business Card",
+      "short_name": "Card",
+      "url": "./card.html",
+      "description": "View digital business card with QR code"
+    },
+    {
+      "name": "Executive CV",
+      "short_name": "CV",
+      "url": "./#act-05",
+      "description": "Jump to current role"
+    }
+  ]
+}
