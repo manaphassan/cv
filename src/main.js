@@ -4,10 +4,11 @@ import {
   ExternalLink, Printer, X, Check, Copy, Award, Layers,
   Briefcase, Cpu, Code, Clock, ShieldCheck, Handshake, Terminal,
   Globe, Linkedin, Palette, Contact, Download,
-  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal
+  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal, QrCode
 } from 'lucide';
+import QRCode from 'qrcode';
 import confetti from 'canvas-confetti';
-import { careerEras, executiveMetrics } from './data/career.js';
+import { careerEras, executiveMetrics, availability } from './data/career.js';
 import { projects, externalProfiles } from './data/projects.js';
 import { skillDomains, verifiedCredentials, toolsAndSoftware } from './data/skills.js';
 
@@ -17,8 +18,77 @@ const icons = {
   ExternalLink, Printer, X, Check, Copy, Award, Layers,
   Briefcase, Cpu, Code, Clock, ShieldCheck, Handshake, Terminal,
   Globe, Linkedin, Palette, Contact, Download,
-  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal
+  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal, QrCode
 };
+
+/* ==========================================================================
+   MODULE-LEVEL CONSTANTS
+   ========================================================================== */
+
+// Shared vCard string — used by both download button and QR code
+const vcardData = [
+  'BEGIN:VCARD',
+  'VERSION:3.0',
+  'FN:Harussani Manaphassan',
+  'N:Manaphassan;Harussani;;;',
+  'TITLE:Head of Creative \u00b7 Brand Systems Architect',
+  'ORG:SuamiSihat \u00b7 Appcable',
+  'EMAIL;TYPE=INTERNET;TYPE=WORK:harussani.manaphassan@gmail.com',
+  'URL:https://manaphassan.github.io/cv/',
+  'URL;TYPE=LinkedIn:https://www.linkedin.com/in/manaphassan',
+  'URL;TYPE=Behance:https://www.behance.net/manaphassan',
+  'URL;TYPE=GitHub:https://github.com/manaphassan',
+  'ADR;TYPE=WORK:;;Banting \u2022 Cyberjaya \u2022 Shah Alam;Selangor;;;Malaysia',
+  'NOTE:Portfolio of Harussani Manaphassan. Head of Creative at Suamisihat. Brand Systems Architect. 19+ years of creative practice.',
+  'END:VCARD'
+].join('\r\n');
+
+// Skill constellation data
+const DOMAIN_META = {
+  brand:    { label: 'Brand & Identity',     color: '#1D4ED8' },
+  ux:       { label: 'UX / Product Design',  color: '#0891B2' },
+  ai:       { label: 'AI & Video',           color: '#7C3AED' },
+  tech:     { label: 'Development',          color: '#059669' },
+  lead:     { label: 'Creative Leadership',  color: '#B45309' },
+};
+
+const CONST_NODES = [
+  { id: 'brand-id',  label: 'Brand Identity',      domain: 'brand', x: 14, y: 32, r: 7 },
+  { id: 'vis-id',    label: 'Visual Identity',     domain: 'brand', x: 26, y: 18, r: 5 },
+  { id: 'art-dir',   label: 'Art Direction',       domain: 'brand', x: 10, y: 52, r: 5 },
+  { id: 'typo',      label: 'Typography',          domain: 'brand', x: 36, y: 12, r: 4 },
+  { id: 'packaging', label: 'Packaging',           domain: 'brand', x: 20, y: 66, r: 5 },
+  { id: 'print',     label: 'Pre-Press & Print',   domain: 'brand', x: 7,  y: 72, r: 4 },
+  { id: 'uxui',      label: 'UX / UI Design',      domain: 'ux',    x: 50, y: 26, r: 7 },
+  { id: 'figma',     label: 'Figma',               domain: 'ux',    x: 40, y: 40, r: 5 },
+  { id: 'wire',      label: 'Wireframing',         domain: 'ux',    x: 60, y: 15, r: 4 },
+  { id: 'proto',     label: 'Prototyping',         domain: 'ux',    x: 68, y: 28, r: 4 },
+  { id: 'mobile',    label: 'Mobile App Design',   domain: 'ux',    x: 73, y: 17, r: 5 },
+  { id: 'ds',        label: 'Design Systems',      domain: 'ux',    x: 46, y: 52, r: 6 },
+  { id: 'ai-vid',    label: 'AI Video',            domain: 'ai',    x: 78, y: 56, r: 6 },
+  { id: 'veo',       label: 'Google Veo',          domain: 'ai',    x: 88, y: 48, r: 5 },
+  { id: 'capcut',    label: 'CapCut',              domain: 'ai',    x: 90, y: 66, r: 4 },
+  { id: 'claude',    label: 'Claude Code',         domain: 'ai',    x: 80, y: 76, r: 5 },
+  { id: 'react',     label: 'React / Svelte',      domain: 'tech',  x: 68, y: 73, r: 5 },
+  { id: 'nocobase',  label: 'NocoBase',            domain: 'tech',  x: 60, y: 83, r: 4 },
+  { id: 'motion',    label: 'Motion Graphics',     domain: 'ai',    x: 72, y: 44, r: 4 },
+  { id: 'lead',      label: 'Creative Direction',  domain: 'lead',  x: 32, y: 79, r: 7 },
+  { id: 'pitch',     label: 'Pitch Decks',         domain: 'lead',  x: 20, y: 86, r: 5 },
+  { id: 'pm',        label: 'Project Management',  domain: 'lead',  x: 44, y: 90, r: 5 },
+];
+
+const CONST_EDGES = [
+  ['brand-id','vis-id'], ['brand-id','art-dir'], ['brand-id','packaging'],
+  ['vis-id','typo'], ['art-dir','print'],
+  ['uxui','figma'], ['uxui','wire'], ['uxui','proto'],
+  ['wire','mobile'], ['proto','mobile'], ['figma','ds'],
+  ['ai-vid','veo'], ['ai-vid','capcut'], ['ai-vid','claude'],
+  ['claude','react'], ['react','nocobase'], ['ai-vid','motion'],
+  ['lead','pitch'], ['lead','pm'],
+  // Cross-domain bridges
+  ['brand-id','figma'], ['ds','brand-id'], ['ds','react'],
+  ['lead','brand-id'], ['lead','uxui'], ['motion','uxui'],
+];
 
 function refreshIcons() {
   createIcons({ icons });
@@ -770,24 +840,7 @@ function initResumeAndContact() {
   const saveVCardLabel = document.getElementById('save-vcard-label');
 
   saveVCardBtn?.addEventListener('click', () => {
-    const vcardContent = [
-      'BEGIN:VCARD',
-      'VERSION:3.0',
-      'FN:Harussani Manaphassan',
-      'N:Manaphassan;Harussani;;;',
-      'TITLE:Head of Creative · Brand Systems Architect',
-      'ORG:SuamiSihat · Appcable',
-      'EMAIL;TYPE=INTERNET;TYPE=WORK:harussani.manaphassan@gmail.com',
-      'URL:https://manaphassan.github.io/cv/',
-      'URL;TYPE=LinkedIn:https://www.linkedin.com/in/manaphassan',
-      'URL;TYPE=Behance:https://www.behance.net/manaphassan',
-      'URL;TYPE=GitHub:https://github.com/manaphassan',
-      'ADR;TYPE=WORK:;;Banting • Cyberjaya • Shah Alam;Selangor;;;Malaysia',
-      'NOTE:Portfolio of Harussani Manaphassan. Creative Direction, Brand Systems Architecture, Product UI/UX, and Pre-Press Print.',
-      'END:VCARD'
-    ].join('\r\n');
-
-    const blob = new Blob([vcardContent], { type: 'text/vcard;charset=utf-8;' });
+    const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -805,10 +858,8 @@ function initResumeAndContact() {
     });
 
     if (saveVCardLabel) {
-      saveVCardLabel.textContent = "vCard Saved!";
-      setTimeout(() => {
-        saveVCardLabel.textContent = "Save vCard (.vcf)";
-      }, 2500);
+      saveVCardLabel.textContent = 'vCard Saved!';
+      setTimeout(() => { saveVCardLabel.textContent = 'Save vCard (.vcf)'; }, 2500);
     }
   });
 }
@@ -1033,8 +1084,289 @@ function initCardTilt() {
   });
 }
 
+/* ==========================================================================
+   NEW: AVAILABILITY BADGE (data-driven from career.js)
+   ========================================================================== */
+function initAvailabilityBadge() {
+  const badge = document.getElementById('availability-badge');
+  const dot   = document.getElementById('availability-dot');
+  const text  = document.getElementById('availability-text');
+  if (!badge || !dot || !text) return;
+
+  const states = {
+    available:   { cls: 'text-accent-emerald', bg: 'bg-accent-emerald', pulse: true,  label: 'AVAILABLE FOR PROJECTS' },
+    limited:     { cls: 'text-amber-500',      bg: 'bg-amber-400',      pulse: true,  label: 'LIMITED AVAILABILITY' },
+    unavailable: { cls: 'text-paper-500',      bg: 'bg-paper-400',      pulse: false, label: 'NOT CURRENTLY AVAILABLE' },
+  };
+  const s = states[availability.status] || states.available;
+
+  badge.className = `flex items-center gap-2 font-semibold ${s.cls}`;
+  dot.className   = `w-2.5 h-2.5 rounded-full ${s.bg}${s.pulse ? ' act-marker-pulse' : ''}`;
+  text.textContent = s.label;
+  badge.title      = availability.message;
+}
+
+/* ==========================================================================
+   NEW: QR CODE SHARE DIALOG
+   ========================================================================== */
+function initVCardQR() {
+  const dialog   = document.getElementById('qr-dialog');
+  const openBtn  = document.getElementById('btn-show-qr');
+  const closeBtn = document.getElementById('btn-close-qr');
+  const canvas   = document.getElementById('qr-canvas');
+  const hint     = document.getElementById('qr-hint');
+  const dlBtn    = document.getElementById('btn-download-qr');
+  const modeBtns = document.querySelectorAll('.qr-mode-btn');
+  if (!dialog || !openBtn || !canvas) return;
+
+  const qrOptions = { width: 200, margin: 1, color: { dark: '#020617', light: '#FFFFFF' } };
+  let activeMode = 'vcard';
+
+  function renderQR(mode) {
+    activeMode = mode;
+    const data = mode === 'vcard' ? vcardData : 'https://manaphassan.github.io/cv/';
+    if (hint) hint.textContent = mode === 'vcard' ? 'Scan to save contact details' : 'Scan to visit portfolio';
+    QRCode.toCanvas(canvas, data, qrOptions).catch(console.error);
+    modeBtns.forEach(b => {
+      const active = b.dataset.qrMode === mode;
+      b.className = active
+        ? 'qr-mode-btn flex-1 py-2 rounded-lg border border-paper-950 bg-paper-950 text-white font-mono text-xs font-bold transition-all'
+        : 'qr-mode-btn flex-1 py-2 rounded-lg border border-paper-200 text-paper-700 font-mono text-xs font-semibold hover:border-paper-400 transition-all';
+    });
+  }
+
+  openBtn.addEventListener('click', () => {
+    renderQR(activeMode);
+    dialog.showModal();
+    refreshIcons();
+  });
+  closeBtn?.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+
+  modeBtns.forEach(btn => {
+    btn.addEventListener('click', () => renderQR(btn.dataset.qrMode));
+  });
+
+  dlBtn?.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = `Harussani_Manaphassan_QR_${activeMode}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+
+/* ==========================================================================
+   NEW: SKILL CONSTELLATION (canvas)
+   ========================================================================== */
+function initSkillConstellation() {
+  const canvas  = document.getElementById('skill-constellation');
+  const tooltip = document.getElementById('constellation-tooltip');
+  const legendEl = document.getElementById('constellation-legend');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, dpr = 1;
+  let hoverNodeId = null;
+  let conT = 0;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    const wrap = canvas.parentElement;
+    W = wrap.offsetWidth;
+    H = wrap.offsetHeight;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+
+  function nodePos(node) {
+    const phase = CONST_NODES.indexOf(node) * 0.71;
+    const amp   = 3.5;
+    return {
+      x: (node.x / 100) * W + Math.sin(conT * 0.5 + phase) * amp,
+      y: (node.y / 100) * H + Math.cos(conT * 0.4 + phase * 1.3) * amp,
+    };
+  }
+
+  function nodeRadius(node) {
+    return (node.r / 100) * Math.min(W, H) * 0.9;
+  }
+
+  function isDarkMode() { return document.documentElement.classList.contains('dark'); }
+
+  function draw() {
+    conT += 0.012;
+    ctx.clearRect(0, 0, W, H);
+
+    const dark = isDarkMode();
+    const connected = new Set();
+    if (hoverNodeId) {
+      CONST_EDGES.forEach(([a, b]) => {
+        if (a === hoverNodeId) connected.add(b);
+        if (b === hoverNodeId) connected.add(a);
+      });
+    }
+
+    // Edges
+    CONST_EDGES.forEach(([aId, bId]) => {
+      const a = CONST_NODES.find(n => n.id === aId);
+      const b = CONST_NODES.find(n => n.id === bId);
+      if (!a || !b) return;
+      const pa = nodePos(a), pb = nodePos(b);
+      const isLit = hoverNodeId && (aId === hoverNodeId || bId === hoverNodeId);
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.lineTo(pb.x, pb.y);
+      ctx.strokeStyle = isLit
+        ? (dark ? 'rgba(203,213,225,0.45)' : 'rgba(51,65,85,0.35)')
+        : (dark ? 'rgba(203,213,225,0.1)'  : 'rgba(51,65,85,0.12)');
+      ctx.lineWidth = isLit ? 1.2 : 0.6;
+      ctx.stroke();
+    });
+
+    // Nodes
+    CONST_NODES.forEach(node => {
+      const { x, y } = nodePos(node);
+      const r     = nodeRadius(node);
+      const color = DOMAIN_META[node.domain]?.color || '#64748B';
+      const isHov = node.id === hoverNodeId;
+      const isCon = connected.has(node.id);
+      const isDim = hoverNodeId && !isHov && !isCon;
+
+      if (isHov) {
+        ctx.beginPath();
+        ctx.arc(x, y, r * 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = color + '22';
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = isDim ? color + '30' : color + (isHov ? 'FF' : 'CC');
+      ctx.fill();
+
+      if (isHov || isCon) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      if (!isDim) {
+        const fsize = Math.max(9, r * 0.95);
+        ctx.font = `${isHov ? 'bold ' : ''}${fsize}px 'JetBrains Mono', monospace`;
+        ctx.fillStyle = dark ? 'rgba(226,232,240,0.9)' : 'rgba(15,23,42,0.85)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText(node.label, x, y + r + 3);
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let closest = null, minD = Infinity;
+    CONST_NODES.forEach(node => {
+      const { x, y } = nodePos(node);
+      const d = Math.hypot(mx - x, my - y);
+      if (d < nodeRadius(node) * 2.8 + 16 && d < minD) { minD = d; closest = node; }
+    });
+    hoverNodeId = closest?.id ?? null;
+    if (closest && tooltip) {
+      tooltip.textContent = closest.label + ' — ' + (DOMAIN_META[closest.domain]?.label || '');
+      tooltip.style.left = (mx + 14) + 'px';
+      tooltip.style.top  = (my - 12) + 'px';
+      tooltip.style.opacity = '1';
+      canvas.style.cursor = 'pointer';
+    } else if (tooltip) {
+      tooltip.style.opacity = '0';
+      canvas.style.cursor = 'default';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    hoverNodeId = null;
+    if (tooltip) tooltip.style.opacity = '0';
+  });
+
+  if (legendEl) {
+    legendEl.innerHTML = Object.entries(DOMAIN_META).map(([, m]) =>
+      `<span class="flex items-center gap-1.5 font-mono text-xs text-paper-600">
+        <span class="w-2.5 h-2.5 rounded-full" style="background:${m.color}"></span>${m.label}
+      </span>`
+    ).join('');
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+}
+
+/* ==========================================================================
+   NEW: PROJECT QUICK-PREVIEW (desktop hover)
+   ========================================================================== */
+function initProjectPreview() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  const preview = document.createElement('div');
+  preview.id = 'project-preview';
+  preview.style.cssText = 'position:fixed;z-index:60;pointer-events:none;width:220px;opacity:0;transform:translateY(8px) scale(0.96);transition:opacity 0.14s ease,transform 0.14s ease';
+  preview.innerHTML = `
+    <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(203,213,225,0.9);box-shadow:0 20px 40px -12px rgba(2,6,23,0.18);background:#fff">
+      <div style="aspect-ratio:16/9;overflow:hidden;background:#f1f5f9">
+        <img id="pp-img" style="width:100%;height:100%;object-fit:cover" src="" alt="" />
+      </div>
+      <div style="padding:8px 10px;background:#020617">
+        <p id="pp-badge" style="font-family:monospace;font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"></p>
+        <p id="pp-title" style="font-family:monospace;font-size:11px;font-weight:700;color:#fff;margin-top:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"></p>
+      </div>
+    </div>`;
+  document.body.appendChild(preview);
+
+  const ppImg   = document.getElementById('pp-img');
+  const ppBadge = document.getElementById('pp-badge');
+  const ppTitle = document.getElementById('pp-title');
+  let mx = 0, my = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    if (preview.style.opacity === '1') {
+      preview.style.left = Math.min(mx + 20, window.innerWidth  - 240) + 'px';
+      preview.style.top  = Math.max(my - 155, 10) + 'px';
+    }
+  });
+
+  document.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('.story-card');
+    if (!card) return;
+    const p = projects.find(pr => pr.id === card.getAttribute('data-id'));
+    if (!p) return;
+    ppImg.src = encodeURI(p.image);
+    ppBadge.textContent = p.badge || p.year;
+    ppTitle.textContent = p.title;
+    preview.style.left = Math.min(mx + 20, window.innerWidth  - 240) + 'px';
+    preview.style.top  = Math.max(my - 155, 10) + 'px';
+    preview.style.opacity = '1';
+    preview.style.transform = 'translateY(0) scale(1)';
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (!e.target.closest('.story-card')) return;
+    if (e.relatedTarget?.closest('.story-card')) return;
+    preview.style.opacity = '0';
+    preview.style.transform = 'translateY(8px) scale(0.96)';
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
+  initAvailabilityBadge();
   initDynamicYears();
   renderHeroMetrics();
   initCountUpMetrics();
@@ -1051,5 +1383,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollToTop();
   initTypewriter();
   initCardTilt();
+  initVCardQR();
+  initSkillConstellation();
+  initProjectPreview();
   refreshIcons();
 });

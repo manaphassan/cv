@@ -139,3 +139,9 @@ export const executiveMetrics = [
   { value: "05", label: "Product Lines", sub: "Smart Mobility & POS Suites", icon: "shield-check" },
   { value: "14+", label: "Years Trust", sub: "Founder Partnership Network", icon: "handshake" }
 ];
+
+/* Availability status — update status to: 'available' | 'limited' | 'unavailable' */
+export const availability = {
+  status:  'available',
+  message: 'Open to creative direction, brand systems & product design projects',
+};
