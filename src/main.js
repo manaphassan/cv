@@ -9,7 +9,7 @@ import {
 import confetti from 'canvas-confetti';
 import { careerEras, executiveMetrics } from './data/career.js';
 import { projects, externalProfiles } from './data/projects.js';
-import { skillDomains, verifiedCredentials } from './data/skills.js';
+import { skillDomains, verifiedCredentials, toolsAndSoftware } from './data/skills.js';
 
 // Icons setup
 const icons = {
@@ -550,6 +550,19 @@ function renderCredentialsAndSkills() {
             </div>
           </div>
         `).join('')}
+        <div class="p-5 rounded-xl border border-paper-200 bg-white">
+          <h4 class="font-bold text-base text-paper-950 mb-3">Tools &amp; Software</h4>
+          <div class="space-y-3">
+            ${toolsAndSoftware.map(cat => `
+              <div>
+                <span class="font-mono text-xs text-paper-500 uppercase tracking-wider font-bold block mb-1.5">${cat.category}</span>
+                <div class="flex flex-wrap gap-1.5">
+                  ${cat.tools.map(t => `<span class="px-2.5 py-1 rounded-lg bg-paper-50 text-paper-800 font-mono text-xs font-medium border border-paper-200">${t}</span>`).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       </div>
     `;
   }

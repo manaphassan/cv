@@ -1,41 +1,49 @@
 export const skillDomains = [
   {
-    title: "Brand Systems & Creative Direction",
+    title: "Brand Identity & Creative Direction",
     icon: "palette",
     color: "blue",
     description: "Designing coherent visual identity systems, packaging, and brand languages that scale across multi-brand holding groups and retail touchpoints.",
     skills: [
-      "Visual Identity Systems & Typography",
-      "Art Direction & Creative Leadership",
-      "Packaging Design & Physical POSM",
+      "Brand Identity Design",
+      "Visual Identity Systems",
+      "Art Direction",
+      "Typography & Layout Design",
+      "Packaging Design & Dielines",
       "Brand Architecture & Guidelines",
-      "Campaign & Performance Creative"
+      "POSM & Retail Collateral",
+      "Campaign Creative Direction"
     ]
   },
   {
-    title: "Product Design & UX/UI Architecture",
+    title: "Product Design & UX/UI",
     icon: "layout",
     color: "cyan",
     description: "Translating business goals into intuitive digital products, from information architecture and wireframing to high-fidelity UI and pitch decks.",
     skills: [
-      "Mobile UI/UX Design (iOS & Android)",
-      "Information Architecture & Wireframing",
-      "Pitch Deck Design & Investor Storytelling",
+      "UX/UI Design",
+      "Mobile App Design (iOS & Android)",
+      "Information Architecture",
+      "Wireframing & Prototyping",
+      "User Journey Mapping",
       "Design Systems & Component Libraries",
-      "User Journey Mapping & Prototyping"
+      "Pitch Deck Design",
+      "Developer Handoff Specifications"
     ]
   },
   {
-    title: "Creative Tech & AI-Assisted Workflows",
+    title: "Creative Technology & AI Workflows",
     icon: "cpu",
     color: "purple",
     description: "Augmenting creative output with modern generative AI video workflows and automated asset pipelines to maximize commercial speed.",
     skills: [
-      "Google Veo AI Commercial Video Workflows",
+      "AI Video Production (Google Veo)",
       "Generative AI Visual Direction",
-      "Creative Asset Automation Pipelines",
-      "Video Post-Production & Motion Graphics",
-      "Front-End Developer Handoff & Specs"
+      "Creative Asset Automation",
+      "Motion Graphics & Animation",
+      "Video Post-Production",
+      "HTML5 / CSS3 / Tailwind CSS",
+      "Front-End Developer Handoff"
     ]
   },
   {
@@ -44,54 +52,75 @@ export const skillDomains = [
     color: "amber",
     description: "Managing creative project direction from concept to delivery, fostering long-term founder partnerships, and understanding production constraints.",
     skills: [
-      "End-to-End Creative Project Direction",
-      "Multi-Brand Portfolio Direction (9 Brands)",
-      "Founder Collaboration & Stakeholder Pitching",
-      "Industrial Pre-Press & Print Production",
-      "Broadcast TV & Documentary Production"
+      "Creative Direction",
+      "Project Management",
+      "Multi-Brand Portfolio Management (9 Brands)",
+      "Stakeholder Presentations & Pitching",
+      "Pre-Press & Print Production",
+      "Broadcast TV Production",
+      "Client Relationship Management"
     ]
+  }
+];
+
+export const toolsAndSoftware = [
+  {
+    category: "Design & Creative",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign", "Adobe After Effects", "Figma", "Canva"]
+  },
+  {
+    category: "AI & Automation",
+    tools: ["Google Veo", "Generative AI Prompting", "Creative Workflow Automation", "SS-CAM (Windows PowerShell)"]
+  },
+  {
+    category: "Development & Deployment",
+    tools: ["HTML5", "CSS3", "Tailwind CSS", "JavaScript", "Vite", "Git", "GitHub Actions", "GitHub Pages"]
+  },
+  {
+    category: "Productivity & Presentation",
+    tools: ["Microsoft Office Suite", "Google Workspace", "PowerPoint", "Keynote"]
   }
 ];
 
 export const verifiedCredentials = [
   {
-    title: "MDEC CIP SPARK Pitch Deck & UI Lead",
+    title: "MDEC CIP SPARK Grant — Pitch Deck & Product UI/UX Lead",
     issuer: "Malaysia Digital Economy Corporation (MDEC)",
-    value: "RM 100,000 Secured for Venture",
+    value: "RM 100,000 Secured",
     year: "2024",
-    detail: "Designed user flows, wireframes, UI mockups, and the pitch deck that helped secure funding.",
+    detail: "Designed user flows, wireframes, high-fidelity UI mockups, and the grant pitch deck that secured RM100,000 in MDEC CIP SPARK funding for SuamiSihat Technology.",
     icon: "award"
   },
   {
-    title: "Head of Creatives (9 Venture Brands)",
+    title: "Creative Director — 9 Venture Brand Systems",
     issuer: "Suamisihat Holding Sdn. Bhd.",
     value: "Creative Leadership",
     year: "2024 – Present",
-    detail: "Directing brand identity, packaging, and design systems across 9 portfolio brands.",
+    detail: "Directing brand identity design, packaging, design systems, and creative workflows across 9 portfolio brands and subsidiaries.",
     icon: "layers"
   },
   {
-    title: "Best IoT Startup (Malaysia)",
+    title: "Best IoT Startup Malaysia — Brand Identity Lead",
     issuer: "Malaysia Rice Bowl Startup Awards (ASEAN Circuit)",
     value: "National Winner & ASEAN Finalist",
     year: "2019",
-    detail: "JomParking® nationwide smart mobility brand identity and municipal product suite.",
+    detail: "JomParking® nationwide smart mobility brand identity, product UI assets, and municipal collateral contributed to this national award.",
     icon: "trophy"
   },
   {
-    title: "2nd Place National PSA Scriptwriting Award",
+    title: "2nd Place — National PSA Scriptwriting Award (TV)",
     issuer: "Ministry of Health (KKM) · RTM · FINAS",
     value: "Naib Johan Penulisan Skrip TV",
     year: "2011",
-    detail: "National public health television announcement on organ donation awareness.",
+    detail: "National public health television PSA on organ donation awareness — scripted, produced, and submitted to KKM national competition.",
     icon: "medal"
   },
   {
     title: "14-Year Continuous Founder Partnership",
-    issuer: "Enterprise Founders & Principals",
-    value: "Continuous Trust Network",
-    year: "2012 – Present",
-    detail: "Ongoing creative direction across SMSfocal Group, JomParkir, Govicle, and Appcable.",
+    issuer: "SMSfocal Group · JomParkir · Govicle · Appcable",
+    value: "Senior Designer → Creative Director",
+    year: "2010 – Present",
+    detail: "Progressed from designer to Creative Director across four ventures under the same founder network, demonstrating sustained performance and leadership growth.",
     icon: "handshake"
   }
 ];

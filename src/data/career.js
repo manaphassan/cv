@@ -10,13 +10,13 @@ export const careerEras = [
     badge: "Product Lead & MDEC Grant Pitch",
     badgeColor: "amber",
     lens: ["creative", "tech"],
-    storyThesis: "Stepped in as Product Design Lead to conceptualize the mobile health platform from zero to one. I structured core features, mapped user journeys, built interactive wireframes and UI mockups, and designed the winning pitch deck that helped the company secure a RM100,000 MDEC CIP SPARK grant. Concurrently, as Creative Director across 9 venture brands, I built the SuamiSihat Design System, developed the SS-CAM (SuamiSihat Creative Asset Management) utility, introduced AI-assisted video workflows with Google Veo for high-velocity commercial campaigns, and directed the corporate brand identity for Appcable.",
+    storyThesis: "Appointed as Product Design Lead to build the SuamiSihat telehealth mobile application (iOS/Android) from zero to one using Figma. Designed information architecture, user flows, interactive wireframes, and high-fidelity UI mockups, then created the grant pitch deck that secured RM100,000 in MDEC CIP SPARK funding. Concurrently, as Creative Director across 9 venture brands, built the SuamiSihat Design System, developed the SS-CAM creative asset management utility, deployed AI-assisted commercial video workflows with Google Veo, and directed the full corporate brand identity system for Appcable.",
     highlights: [
-      "Product Design Lead: designed core features, UX flows, UI mockups, and winning MDEC CIP SPARK grant pitch deck (RM100K secured).",
-      "Managed creative and product direction end-to-end from initial concept through technical developer handoff.",
-      "Creative Director: directed brand identity, packaging, and design systems across 9 venture brands and subsidiaries.",
-      "Pioneered commercial AI video creative pipelines with Google Veo to rapidly produce high-performing e-commerce ad variants.",
-      "Brand Systems Architect for Appcable: created the full corporate visual identity, stationery suite, and design workflows."
+      "Designed UX/UI for SuamiSihat telehealth mobile application (iOS/Android) from zero to one, delivering information architecture, user flows, wireframes, and high-fidelity UI mockups in Figma.",
+      "Created grant pitch deck that secured RM100,000 MDEC CIP SPARK funding; managed product design delivery through technical developer handoff.",
+      "Directed brand identity design, packaging, and design systems as Creative Director for 9 venture brands within Suamisihat Holding Group.",
+      "Built AI-assisted commercial video production pipeline using Google Veo, reducing content production turnaround by 80% for e-commerce campaigns.",
+      "Developed SuamiSihat Design System (Single Source of Truth) standardising design tokens, colour palettes, and component libraries across all 9 brands."
     ],
     proofBadges: [
       { label: "MDEC Grant Pitch", value: "RM 100K Secured", icon: "award" },
@@ -37,12 +37,12 @@ export const careerEras = [
     badge: "Best IoT Startup Malaysia",
     badgeColor: "cyan",
     lens: ["creative", "tech"],
-    storyThesis: "Joined as the sole creative lead for JomParking®—a nationally deployed municipal smart parking platform. Owned the brand through rapid national adoption, leading to the Best IoT Startup Malaysia award at the Rice Bowl Startup Awards (ASEAN Finalist). Promoted to Head of Creative Department in 2021, I spearheaded the enterprise rebrand to Govicle, leading creative strategy across 5 product lines for municipal councils across Southeast Asia.",
+    storyThesis: "Joined as sole designer with full brand ownership for JomParking® — a nationally deployed municipal smart parking platform. Directed brand identity design, mobile UI/UX assets, marketing campaigns, and investor presentations through rapid national adoption. The brand work contributed to JomParking winning Best IoT Startup Malaysia at the Rice Bowl Startup Awards (ASEAN Finalist). Promoted to Head of Creative Department in 2021, leading the enterprise rebrand to Govicle and directing creative strategy across 5 commercial IoT product lines for municipal councils across Southeast Asia.",
     highlights: [
-      "Complete brand ownership for JomParking® nationwide platform across consumer and municipal tiers.",
-      "Won Best IoT Startup Malaysia at the Rice Bowl Startup Awards (ASEAN Finalist).",
-      "Promoted to Head of Creative Department; led enterprise rebrand to Govicle across 5 IoT product lines.",
-      "Authored high-stakes municipal tender presentations and digital mobility interfaces (PBT Melaka, MPBP Batu Pahat)."
+      "Led complete brand identity design and creative strategy for JomParking® — Malaysia's nationally deployed smart parking platform serving municipal councils and millions of motorists.",
+      "Received Best IoT Startup Malaysia award at Rice Bowl Startup Awards as ASEAN Finalist, recognising JomParking® brand identity and product design work.",
+      "Promoted to Head of Creative Department; spearheaded enterprise rebrand from JomParkir to Govicle, directing visual identity across 5 IoT product lines for Southeast Asia.",
+      "Produced UI/UX assets, investor pitch decks, and high-stakes municipal tender presentations for PBT Melaka and MPBP Batu Pahat."
     ],
     proofBadges: [
       { label: "Rice Bowl Startup Awards", value: "Best IoT Startup", icon: "trophy" },
@@ -63,12 +63,12 @@ export const careerEras = [
     badge: "6 Entities Concurrently",
     badgeColor: "purple",
     lens: ["creative"],
-    storyThesis: "Hired as a designer, I became the sole creative engine supporting six distinct business entities simultaneously under a single founder: software development, IT hardware supply, Restoran Chamcha (F&B), walk-in digital print at PICC (DTP PLT), and industrial large-format signages (Trapezoid Media). This intense 6-year operational trial forged a 14-year trust bond with the founder, who later invited me to lead Govicle and Appcable.",
+    storyThesis: "Hired as a multimedia designer but became the sole creative engine supporting six distinct business entities simultaneously: software development, IT hardware supply, Restoran Chamcha (F&B), DTP PLT (walk-in print at PICC), and Trapezoid Media (large-format print house). Using Adobe Creative Suite daily across brand identity design, packaging, large-format signage, and exhibition materials, this 6-year operational crucible produced landmark corporate identity work for PICC and MIDF Property Berhad, and forged a 14-year founder trust relationship that progressed through JomParkir, Govicle, and Appcable.",
     highlights: [
-      "Simultaneously maintained distinct commercial identities for 6 unrelated business entities.",
-      "Operated end-to-end design and production across small and large-format print houses.",
-      "Delivered landmark corporate identity and fleet branding for Putrajaya International Convention Centre (PICC) and MIDF Property Berhad.",
-      "Established an enduring 14-year founder trust relationship carrying through to modern leadership roles."
+      "Managed graphic design and visual identity for 6 simultaneous business entities as sole creative lead, covering brand architecture, packaging, and marketing collateral.",
+      "Executed end-to-end print design and large-format production including signage, packaging, brochures, and POSM using Adobe Creative Suite.",
+      "Designed corporate brand identity, vehicle fleet livery, and event exhibition materials for national landmark Putrajaya International Convention Centre (PICC) and MIDF Property Berhad.",
+      "Established 14-year founder trust partnership across SMSfocal, JomParkir, Govicle, and Appcable, progressing from designer to Creative Director."
     ],
     proofBadges: [
       { label: "Founder Trust Network", value: "14+ Years", icon: "handshake" },
@@ -88,12 +88,12 @@ export const careerEras = [
     badge: "Broadcast & National Media",
     badgeColor: "blue",
     lens: ["creative"],
-    storyThesis: "Transitioned from static print into high-stakes visual communications. Served as embedded photojournalist for the Secretary-General (KSU) and Minister of Home Affairs (KDN), followed by managing documentary and PSA broadcast production for national television networks (RTM and FINAS). Scripted the national TV PSA for organ donation that won 2nd Place from the Ministry of Health (KKM).",
+    storyThesis: "Transitioned from print production into broadcast and federal visual communications. Served as embedded photojournalist for the Secretary-General and Minister of Home Affairs (KDN), followed by managing full broadcast production at Galaxy Features Network for RTM documentary series and FINAS-standard productions. Scripted the national television PSA on organ donation that received 2nd Place from the Ministry of Health, RTM, and FINAS. Developed motion graphics and video post-production skills that complement the brand and product design practice.",
     highlights: [
-      "Embedded photojournalist and editorial designer for the official iKDN portal.",
-      "Operations Manager for broadcast documentary series 1001 Malaysia on RTM, FINAS, and Filem Negara Malaysia.",
-      "Won 2nd Place in the National Public Service Announcement (PSA) Script Writing Competition (TV) issued by KKM, RTM, and FINAS.",
-      "Directed camera crews, voiceover talent, and motion graphics post-production."
+      "Served as embedded photojournalist and editorial graphic designer for the Ministry of Home Affairs (KDN), producing visual content for the official iKDN ministerial portal.",
+      "Managed full broadcast production for RTM 1001 Malaysia documentary series to FINAS and Filem Negara Malaysia broadcast standards as Operations Manager.",
+      "Received 2nd Place, National PSA Scriptwriting Award (TV) — Ministry of Health (KKM), RTM, and FINAS, for national organ donation awareness campaign.",
+      "Directed camera crew operations, voiceover talent coordination, and motion graphics post-production for national broadcast television."
     ],
     proofBadges: [
       { label: "National PSA Script Award", value: "2nd Place TV (KKM)", icon: "medal" },
@@ -113,12 +113,12 @@ export const careerEras = [
     badge: "Commercial Print Foundations",
     badgeColor: "emerald",
     lens: ["creative"],
-    storyThesis: "Fresh from a Diploma in Multimedia Technology, my career began on the factory floor of a commercial printing press in Taiping. Machines dictated constraints, deadlines were unforgiving, and clients paid for physical outcomes. Promoted to Senior Designer, I helped launch the Kuala Kangsar branch—instilling the production discipline, pre-press mastery, and client accountability that grounded my entire design trajectory.",
+    storyThesis: "Career began on the factory floor of Ridzuanfast Print in Taiping — a commercial press where CMYK constraints, bleed registration, dot gain, and production deadlines were non-negotiable. Using Adobe software daily, I managed pre-press CMYK workflows, operated large-format presses, and mastered production discipline through direct client accountability. Promoted to Senior Graphic Designer and helped establish the Kuala Kangsar branch. This industrial print foundation provides the production rigour that underpins every subsequent design and brand architecture role.",
     highlights: [
-      "Operated industrial large-format presses, digital plotters, and direct-to-plate pre-flight workflows.",
-      "Rapidly promoted from Junior to Senior Designer within tenure.",
-      "Helped establish and operationalize the Kuala Kangsar branch through direct client management.",
-      "Learned the unforgiving reality that in production design, precision and deadlines are absolute."
+      "Operated commercial large-format printing presses, digital plotters, and direct-to-plate pre-flight CMYK workflows in a live production environment.",
+      "Promoted from Junior Graphic Designer to Senior Graphic Designer within 2 years based on performance and technical proficiency.",
+      "Established and operationalised Kuala Kangsar branch office through direct client acquisition and project management.",
+      "Developed pre-press print production expertise in colour management, trapping, bleed registration, and imposition standards using Adobe software."
     ],
     proofBadges: [
       { label: "Promotion Trajectory", value: "Junior to Senior", icon: "trending-up" },

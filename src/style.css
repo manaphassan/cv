@@ -252,15 +252,47 @@ dialog::backdrop {
   body {
     background: #FFFFFF !important;
     color: #0F172A !important;
-    font-size: 12pt !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
   }
-  header, footer, nav, #story-nav-strip, #btn-cmd-palette, #btn-open-resume, #scroll-progress-bar {
+  /* Hide everything except the resume dialog */
+  main, header, footer, nav,
+  #btn-scroll-top, #lightbox-dialog, #cmd-dialog,
+  #scroll-progress-bar, .fixed {
     display: none !important;
   }
+  /* Make the resume dialog print cleanly */
   #resume-dialog {
     display: block !important;
     position: static !important;
     padding: 0 !important;
     max-width: 100% !important;
+    overflow: visible !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
+  #resume-printable-content {
+    max-height: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0.8cm 1cm !important;
+  }
+  /* Hide the dialog action toolbar when printing */
+  #resume-toolbar {
+    display: none !important;
+  }
+  /* Ensure text renders in black for ATS scanners */
+  #resume-printable-content * {
+    color: #0F172A !important;
+  }
+  #resume-printable-content a {
+    text-decoration: none !important;
+  }
+  /* Page break handling */
+  h4 { page-break-after: avoid; }
+  li, p { page-break-inside: avoid; }
 }
