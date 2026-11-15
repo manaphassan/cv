@@ -163,7 +163,7 @@ Change `status` and push — the badge updates within minutes via GitHub Actions
 | 💼 LinkedIn | [linkedin.com/in/manaphassan](https://www.linkedin.com/in/manaphassan) |
 | 🎨 Behance | [behance.net/manaphassan](https://www.behance.net/manaphassan) |
 | 🐙 GitHub | [github.com/manaphassan](https://github.com/manaphassan) |
-| 📧 Email | [harussani.manaphassan@gmail.com](mailto:harussani.manaphassan@gmail.com) |
+| 📧 Email | [manaphassan@gmail.com](mailto:manaphassan@gmail.com) |
 | 👤 Humans | [manaphassan.github.io/cv/humans.txt](https://manaphassan.github.io/cv/humans.txt) |
 
 ---

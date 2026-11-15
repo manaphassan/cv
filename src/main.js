@@ -33,7 +33,7 @@ const vcardData = [
   'N:Manaphassan;Harussani;;;',
   'TITLE:Head of Creative \u00b7 Brand Systems Architect',
   'ORG:SuamiSihat \u00b7 Appcable',
-  'EMAIL;TYPE=INTERNET;TYPE=WORK:harussani.manaphassan@gmail.com',
+  'EMAIL;TYPE=INTERNET;TYPE=WORK:manaphassan@gmail.com',
   'URL:https://manaphassan.github.io/cv/',
   'URL;TYPE=LinkedIn:https://www.linkedin.com/in/manaphassan',
   'URL;TYPE=Behance:https://www.behance.net/manaphassan',
