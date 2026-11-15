@@ -1,97 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"
-     role="img" aria-label="HM — Harussani Manaphassan">
-  <title>HM — Harussani Manaphassan</title>
+     role="img" aria-label="hm — Harussani Manaphassan">
+  <title>hm — Harussani Manaphassan</title>
 
-  <defs>
-    <!--
-      ADAPTIVE PAPER / E-INK THEME
-      Light → warm cream paper + dark ink halftone dots
-      Dark  → near-black ground + inverted halftone (light forms, dark holes)
-    -->
-    <style>
+  <style>
+    /*
+      Adaptive paper / e-ink theme
+      Light → warm cream paper + near-black ink
+      Dark  → near-black ground + warm cream letterforms
+    */
+    :root {
+      --bg:     #F5F0EA;
+      --border: #C2BAB0;
+      --ink:    #0D0D0D;
+    }
+    @media (prefers-color-scheme: dark) {
       :root {
-        --bg:          #F5F0EA;
-        --border-out:  #C2BAB0;
-        --border-in:   #DDD6CC;
-        --line-color:  #E8E0D6;
-        --ink-base:    #0C0C0C;
-        --ink-hole:    #EDE8E1;
+        --bg:     #0D0D0D;
+        --border: #2A2A2A;
+        --ink:    #EDE8E1;
       }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg:         #0F0F0F;
-          --border-out: #2C2C2C;
-          --border-in:  #1E1E1E;
-          --line-color: #181818;
-          --ink-base:   #EDE8E1;
-          --ink-hole:   #0C0C0C;
-        }
-      }
-    </style>
+    }
+  </style>
 
-    <!-- Halftone dot pattern — dark ink with tiny paper holes (inverts in dark mode) -->
-    <pattern id="halftone" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
-      <rect width="4.5" height="4.5" fill="var(--ink-base)"/>
-      <circle cx="2.25" cy="2.25" r="1.1" fill="var(--ink-hole)"/>
-    </pattern>
+  <!-- Paper / e-ink background -->
+  <rect width="100" height="100" rx="20" fill="var(--bg)"/>
 
-    <!-- Paper grain: subtle horizontal ruled lines -->
-    <pattern id="paper-lines" x="0" y="0" width="100" height="9" patternUnits="userSpaceOnUse">
-      <rect width="100" height="9" fill="none"/>
-      <line x1="0" y1="8.5" x2="100" y2="8.5" stroke="var(--line-color)" stroke-width="0.35"/>
-    </pattern>
+  <!-- Editorial border frame (thin single rule — letterpress / newspaper motif) -->
+  <rect x="2.5" y="2.5" width="95" height="95" rx="18"
+        fill="none" stroke="var(--border)" stroke-width="1.2"/>
 
-    <!-- Letterpress ink-spread filter — 0.3px blur simulates ink bleed into paper -->
-    <filter id="press" x="-4%" y="-4%" width="108%" height="108%">
-      <feGaussianBlur stdDeviation="0.28" result="blur"/>
-      <feComposite in="blur" in2="SourceGraphic" operator="over"/>
-    </filter>
-  </defs>
-
-  <!-- ── BACKGROUND ── -->
-  <!-- Warm paper base -->
-  <rect width="100" height="100" rx="17" fill="var(--bg)"/>
-  <!-- Ruled paper texture -->
-  <rect width="100" height="100" rx="17" fill="url(#paper-lines)" opacity="0.9"/>
-  <!-- Outer editorial border -->
-  <rect x="1.5" y="1.5" width="97" height="97" rx="15.5" fill="none"
-        stroke="var(--border-out)" stroke-width="1.5"/>
-  <!-- Inner fine rule (double-rule letterpress motif) -->
-  <rect x="3.5" y="3.5" width="93" height="93" rx="13.5" fill="none"
-        stroke="var(--border-in)" stroke-width="0.5"/>
-
-  <!-- ── MERGED HM LETTERFORMS ── -->
   <!--
-    Geometry:
-      Bar 1 (H left)          x=9 – 20   (11 px)
-      Bar 2 (shared H·right / M·left)  x=44.5 – 55.5  (11 px)
-      Bar 3 (M right)         x=80 – 91  (11 px)
-      H crossbar              x=9 – 55.5, y=41 – 51
-      M outer peak            (44.5,21) → (68,51) → (91,21)
-      M inner void            (55.5,27) → (68,57) → (80,27)
+    hm merged ligature — single closed path
+    ─────────────────────────────────────────
+    3 bars:
+      Bar 1  x=15–30  y=12–84  (h ascender — tall)
+      Bar 2  x=43–58  y=36–84  (shared h·right / m·left)
+      Bar 3  x=71–86  y=36–84  (m right)
+
+    2 arches (perfect semicircles, r=6.5, sweep upward):
+      h arch  (30,36) → peak y≈29.5 → (43,36)
+      m arch  (58,36) → peak y≈29.5 → (71,36)
+
+    Trace (clockwise outer contour):
+      bottom-left → up bar1 → across bar1 top → down to arch level
+      → h arch up → across bar2 top → m arch up → across bar3 top
+      → down bar3 → baseline close
   -->
-  <g filter="url(#press)" fill="url(#halftone)">
-
-    <!-- Bar 1 — H left vertical -->
-    <rect x="9"   y="21" width="11"  height="58"/>
-
-    <!-- Bar 2 — SHARED: H right vertical = M left vertical -->
-    <rect x="44.5" y="21" width="11"  height="58"/>
-
-    <!-- H crossbar (spans Bar 1 → Bar 2) -->
-    <rect x="9"   y="41" width="46.5" height="10"/>
-
-    <!--
-      M form: diagonals + Bar 3
-      Outer polygon traces full M shape from Bar 2.
-      Inner polygon (evenodd) punches the two V-voids.
-      Bar 2 (x=44.5–55.5) is included in this path and
-      overlaps the rect above — same fill → visually identical, no artifact.
-    -->
-    <path fill-rule="evenodd" d="
-      M 44.5,79 L 44.5,21 L 68,51 L 91,21 L 91,79 Z
-      M 55.5,79 L 80,79  L 80,27 L 68,57 L 55.5,27 Z
-    "/>
-
-  </g>
+  <path fill="var(--ink)" d="
+    M 15,84
+    L 15,12
+    L 30,12
+    L 30,36
+    A 6.5,6.5,0,0,0 43,36
+    L 58,36
+    A 6.5,6.5,0,0,0 71,36
+    L 86,36
+    L 86,84
+    Z
+  "/>
 </svg>

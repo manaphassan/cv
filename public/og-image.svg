@@ -12,15 +12,10 @@
   </defs>
   <rect width="1200" height="630" fill="url(#dots)"/>
 
-  <!-- Left panel: HM logo marks (no background rect — blends with page bg) -->
-  <!-- translate(84,165) scale(3) centres marks at (231,315) in 460×630 panel -->
-  <g transform="translate(84,165) scale(3)" fill="white">
-    <!-- H -->
-    <rect x="8"  y="21" width="10" height="58"/>
-    <rect x="36" y="21" width="10" height="58"/>
-    <rect x="8"  y="41" width="38" height="10"/>
-    <!-- M (classic diagonal, evenodd) -->
-    <path fill-rule="evenodd" d="M 52,79 L 52,21 L 71,51 L 90,21 L 90,79 Z M 62,79 L 80,79 L 80,27 L 71,57 L 62,27 Z"/>
+  <!-- Left panel: hm merged letterform (no background box — blends with dark OG bg) -->
+  <!-- translate(104,195) scale(2.5) centres the mark at (230,315) in 460×630 panel -->
+  <g transform="translate(104,195) scale(2.5)" fill="white">
+    <path d="M 15,84 L 15,12 L 30,12 L 30,36 A 6.5,6.5,0,0,0 43,36 L 58,36 A 6.5,6.5,0,0,0 71,36 L 86,36 L 86,84 Z"/>
   </g>
 
   <!-- Vertical divider -->
