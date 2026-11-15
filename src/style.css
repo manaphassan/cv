@@ -311,6 +311,19 @@ dialog::backdrop {
     font-size: 11pt !important;
     line-height: 1.4 !important;
   }
+  /* Page settings */
+  @page { margin: 1cm 1.2cm; }
+  /* Printed CV page header */
+  #resume-printable-content::before {
+    content: 'Harussani Manaphassan  \2022  manaphassan@gmail.com  \2022  manaphassan.github.io/cv';
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: #808080;
+    padding-bottom: 6pt;
+    margin-bottom: 8pt;
+    border-bottom: 0.5pt solid #E2E8F0;
+  }
   /* Hide everything except the resume dialog */
   main, header, footer, nav,
   #btn-scroll-top, #lightbox-dialog, #cmd-dialog,

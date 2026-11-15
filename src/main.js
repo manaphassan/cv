@@ -4,13 +4,15 @@ import {
   ExternalLink, Printer, X, Check, Copy, Award, Layers,
   Briefcase, Cpu, Code, Clock, ShieldCheck, Handshake, Terminal,
   Globe, Linkedin, Palette, Contact, Download,
-  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal, QrCode
+  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal, QrCode,
+  MessageCircle
 } from 'lucide';
 import QRCode from 'qrcode';
 import confetti from 'canvas-confetti';
 import { careerEras, executiveMetrics, availability } from './data/career.js';
 import { projects, externalProfiles } from './data/projects.js';
 import { skillDomains, verifiedCredentials, toolsAndSoftware } from './data/skills.js';
+import { testimonials } from './data/testimonials.js';
 
 // Icons setup
 const icons = {
@@ -18,7 +20,7 @@ const icons = {
   ExternalLink, Printer, X, Check, Copy, Award, Layers,
   Briefcase, Cpu, Code, Clock, ShieldCheck, Handshake, Terminal,
   Globe, Linkedin, Palette, Contact, Download,
-  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal, QrCode
+  Moon, Sun, ChevronLeft, ChevronRight, ArrowUp, Mail, Trophy, Medal, QrCode, MessageCircle
 };
 
 /* ==========================================================================
@@ -331,6 +333,10 @@ function navigateLightbox(dir) {
     img.style.opacity = '1';
   }, 150);
 
+  // Update counter
+  const lbCounter = document.getElementById('lb-counter');
+  if (lbCounter) lbCounter.textContent = (lbIndex + 1) + ' / ' + lbGallery.length;
+
   // Sync thumbnail highlight
   document.querySelectorAll('.lb-thumb-btn').forEach((btn, i) => {
     btn.className = i === lbIndex
@@ -418,6 +424,13 @@ function openLightbox(projectId) {
   const hasMultiple = images.length > 1;
   if (prevBtn) prevBtn.classList.toggle('hidden', !hasMultiple);
   if (nextBtn) nextBtn.classList.toggle('hidden', !hasMultiple);
+
+  // Counter
+  const lbCounter = document.getElementById('lb-counter');
+  if (lbCounter) {
+    lbCounter.textContent = hasMultiple ? '1 / ' + images.length : '';
+    lbCounter.style.opacity = hasMultiple ? '1' : '0';
+  }
 
   dialog.showModal();
   refreshIcons();
@@ -744,6 +757,7 @@ function initCommandPalette() {
 
   const commands = [
     { title: "Download Executive CV (PDF)", cat: "Dossier", action: () => openResume() },
+    { title: "WhatsApp +60 10-265 7097", cat: "Contact", action: () => window.open('https://wa.me/60102657097', '_blank') },
     { title: "Open Digital Business Card", cat: "Contact", action: () => window.open('./card.html', '_self') },
     { title: "Call +60 10-265 7097", cat: "Contact", action: () => { window.location.href = 'tel:+60102657097'; } },
     { title: "Email manaphassan@gmail.com", cat: "Contact", action: () => { window.location.href = 'mailto:manaphassan@gmail.com'; } },
@@ -1492,6 +1506,31 @@ function initProjectPreview() {
   });
 }
 
+/* ==========================================================================
+   TESTIMONIALS (renders only when testimonials.js has entries)
+   ========================================================================== */
+function renderTestimonials() {
+  if (!testimonials.length) return;
+  const section   = document.getElementById('testimonials-section');
+  const container = document.getElementById('testimonials-container');
+  if (!section || !container) return;
+
+  container.innerHTML = testimonials.map(t => `
+    <div class="p-6 rounded-2xl border border-paper-200 bg-paper-50 flex flex-col justify-between story-card">
+      <p class="text-sm text-paper-700 leading-relaxed mb-4">&ldquo;${t.quote}&rdquo;</p>
+      <div class="pt-4 border-t border-paper-200 flex items-center justify-between gap-3">
+        <div>
+          <p class="font-mono text-xs font-bold text-paper-950">${t.name}</p>
+          <p class="font-mono text-xs text-paper-500 mt-0.5">${t.role} &middot; ${t.company}</p>
+        </div>
+        ${t.year ? `<span class="font-mono text-xs text-paper-400">${t.year}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  section.classList.remove('hidden');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
   initAvailabilityBadge();
@@ -1502,6 +1541,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDisciplineFilter();
   initAppcableBrandShowcase();
   renderCredentialsAndSkills();
+  renderTestimonials();
   fetchGitHubRepos();
   initScrollObserver();
   initScrollProgressAndTimelineSpine();
