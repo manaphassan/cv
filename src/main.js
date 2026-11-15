@@ -744,6 +744,9 @@ function initCommandPalette() {
 
   const commands = [
     { title: "Download Executive CV (PDF)", cat: "Dossier", action: () => openResume() },
+    { title: "Open Digital Business Card", cat: "Contact", action: () => window.open('./card.html', '_self') },
+    { title: "Call +60 10-265 7097", cat: "Contact", action: () => { window.location.href = 'tel:+60102657097'; } },
+    { title: "Email manaphassan@gmail.com", cat: "Contact", action: () => { window.location.href = 'mailto:manaphassan@gmail.com'; } },
     { title: "SuamiSihat Telehealth App (suamisihat.app)", cat: "Live Platform", action: () => window.open('https://www.suamisihat.app/', '_blank') },
     { title: "JomParking® Platform (web.jomparking.com)", cat: "Live Platform", action: () => window.open('https://web.jomparking.com/', '_blank') },
     { title: "GoPayy+ Digital Payment (govicle.com/gopayy)", cat: "Live Platform", action: () => window.open('https://govicle.com/gopayy/', '_blank') },
