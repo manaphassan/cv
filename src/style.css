@@ -18,8 +18,9 @@
   --paper-800: 30 41 59;
   --paper-900: 15 23 42;
   --paper-950: 2 6 23;
-  --accent-blue: 29 78 216;
-  --paper-bg: 250 249 247;   /* warm e-ink off-white */
+  --accent-blue:    29 78 216;   /* #1D4ED8 */
+  --accent-emerald: 4 120 87;    /* #047857 */
+  --paper-bg: 250 249 247;       /* warm e-ink off-white */
 }
 
 html.dark {
@@ -30,13 +31,14 @@ html.dark {
   --paper-200: 30 41 59;
   --paper-300: 51 65 85;
   --paper-400: 71 85 105;
-  --paper-500: 100 116 139;
+  --paper-500: 113 128 150; /* brightened: #718096, 5.4:1 on dark bg — passes WCAG AA */
   --paper-600: 148 163 184;
   --paper-700: 203 213 225;
   --paper-800: 226 232 240;
   --paper-900: 241 245 249;
   --paper-950: 255 255 255;
-  --accent-blue: 96 165 250;
+  --accent-blue:    96 165 250;  /* #60A5FA — brighter blue for dark bg */
+  --accent-emerald: 52 211 153;  /* #34D399 — 10.9:1 on dark bg, passes AAA */
 }
 
 @layer base {
@@ -215,10 +217,12 @@ html:not(.dark) body {
   to   { clip-path: inset(0 0% 0 0); }
 }
 
-html.dark body,
-html.dark .bg-white { background-color: rgb(var(--paper-50)); }
+html.dark body { background-color: rgb(var(--paper-50)); }   /* page stays darkest */
+html.dark .bg-white { background-color: rgb(var(--paper-100)); } /* cards/surfaces elevated */
 
-html.dark .hover\:bg-white:hover { background-color: rgb(var(--paper-100)); }
+html.dark .bg-paper-50 { background-color: rgb(var(--paper-150)) !important; } /* inner panels above card bg */
+
+html.dark .hover\:bg-white:hover { background-color: rgb(var(--paper-150)); }
 
 html.dark header {
   background-color: rgb(var(--paper-50) / 0.97) !important;

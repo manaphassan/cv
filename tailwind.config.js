@@ -28,11 +28,11 @@ export default {
           950: 'rgb(var(--paper-950) / <alpha-value>)',
         },
         accent: {
-          blue: 'rgb(var(--accent-blue) / <alpha-value>)',
+          blue:      'rgb(var(--accent-blue)     / <alpha-value>)',
+          emerald:   'rgb(var(--accent-emerald)  / <alpha-value>)',
           hoverBlue: '#1E40AF',
-          amber: '#B45309',
-          emerald: '#047857',
-          crimson: '#BE123C'
+          amber:     '#B45309',
+          crimson:   '#BE123C'
         }
       },
       fontSize: {
