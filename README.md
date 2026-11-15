@@ -1,6 +1,6 @@
 # Harussani Manaphassan — Design & Brand Systems Portfolio
 
-> **Creative Director · Brand Systems Architect**  
+> **Head of Creative · Brand Systems Architect**  
 > *Banting • Cyberjaya • Shah Alam, Malaysia*  
 > 🌐 **Live Portfolio:** [https://manaphassan.github.io/manaphassan_portfolio/](https://manaphassan.github.io/manaphassan_portfolio/)
 

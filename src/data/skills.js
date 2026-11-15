@@ -92,7 +92,7 @@ export const verifiedCredentials = [
     icon: "award"
   },
   {
-    title: "Creative Director — 9 Venture Brand Systems",
+    title: "Head of Creative — 9 Venture Brand Systems",
     issuer: "Suamisihat Holding Sdn. Bhd.",
     value: "Creative Leadership",
     year: "2024 – Present",
@@ -118,9 +118,9 @@ export const verifiedCredentials = [
   {
     title: "14-Year Continuous Founder Partnership",
     issuer: "SMSfocal Group · JomParkir · Govicle · Appcable",
-    value: "Senior Designer → Creative Director",
+    value: "Senior Designer → Head of Creative",
     year: "2010 – Present",
-    detail: "Progressed from designer to Creative Director across four ventures under the same founder network, demonstrating sustained performance and leadership growth.",
+    detail: "Progressed from designer to Head of Creative across four ventures under the same founder network, demonstrating sustained performance and leadership growth.",
     icon: "handshake"
   }
 ];

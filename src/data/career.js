@@ -4,17 +4,17 @@ export const careerEras = [
     actNumber: "05",
     era: "2024 – Present",
     actTitle: "Creative Leadership & Product Direction",
-    role: "Creative Director · Brand Systems Architect",
+    role: "Head of Creative · Brand Systems Architect",
     organization: "Suamisihat Holding · Suamisihat Tech · Appcable",
     location: "Banting • Cyberjaya • Shah Alam, MY",
     badge: "Product Lead & MDEC Grant Pitch",
     badgeColor: "amber",
     lens: ["creative", "tech"],
-    storyThesis: "Appointed as Product Design Lead to build the SuamiSihat telehealth mobile application (iOS/Android) from zero to one using Figma. Designed information architecture, user flows, interactive wireframes, and high-fidelity UI mockups, then created the grant pitch deck that secured RM100,000 in MDEC CIP SPARK funding. Concurrently, as Creative Director across 9 venture brands, built the SuamiSihat Design System, developed the SS-CAM creative asset management utility, deployed AI-assisted commercial video workflows with Google Veo, and directed the full corporate brand identity system for Appcable.",
+    storyThesis: "Appointed as Product Design Lead to build the SuamiSihat telehealth mobile application (iOS/Android) from zero to one using Figma. Designed information architecture, user flows, interactive wireframes, and high-fidelity UI mockups, then created the grant pitch deck that secured RM100,000 in MDEC CIP SPARK funding. Concurrently, as Head of Creative across 9 venture brands, built the SuamiSihat Design System, developed the SS-CAM creative asset management utility, deployed AI-assisted commercial video workflows with Google Veo, and directed the full corporate brand identity system for Appcable.",
     highlights: [
       "Designed UX/UI for SuamiSihat telehealth mobile application (iOS/Android) from zero to one, delivering information architecture, user flows, wireframes, and high-fidelity UI mockups in Figma.",
       "Created grant pitch deck that secured RM100,000 MDEC CIP SPARK funding; managed product design delivery through technical developer handoff.",
-      "Directed brand identity design, packaging, and design systems as Creative Director for 9 venture brands within Suamisihat Holding Group.",
+      "Directed brand identity design, packaging, and design systems as Head of Creative for 9 venture brands within Suamisihat Holding Group.",
       "Built AI-assisted commercial video production pipeline using Google Veo, reducing content production turnaround by 80% for e-commerce campaigns.",
       "Developed SuamiSihat Design System (Single Source of Truth) standardising design tokens, colour palettes, and component libraries across all 9 brands."
     ],
@@ -68,7 +68,7 @@ export const careerEras = [
       "Managed graphic design and visual identity for 6 simultaneous business entities as sole creative lead, covering brand architecture, packaging, and marketing collateral.",
       "Executed end-to-end print design and large-format production including signage, packaging, brochures, and POSM using Adobe Creative Suite.",
       "Designed corporate brand identity, vehicle fleet livery, and event exhibition materials for national landmark Putrajaya International Convention Centre (PICC) and MIDF Property Berhad.",
-      "Established 14-year founder trust partnership across SMSfocal, JomParkir, Govicle, and Appcable, progressing from designer to Creative Director."
+      "Established 14-year founder trust partnership across SMSfocal, JomParkir, Govicle, and Appcable, progressing from designer to Head of Creative."
     ],
     proofBadges: [
       { label: "Founder Trust Network", value: "14+ Years", icon: "handshake" },

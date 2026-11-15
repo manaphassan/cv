@@ -759,7 +759,7 @@ function initResumeAndContact() {
       'VERSION:3.0',
       'FN:Harussani Manaphassan',
       'N:Manaphassan;Harussani;;;',
-      'TITLE:Creative Director · Brand Systems Architect',
+      'TITLE:Head of Creative · Brand Systems Architect',
       'ORG:SuamiSihat · Appcable',
       'EMAIL;TYPE=INTERNET;TYPE=WORK:harussani.manaphassan@gmail.com',
       'URL:https://manaphassan.github.io/manaphassan_portfolio/',
