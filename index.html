@@ -117,11 +117,15 @@
       <!-- Brand Identity -->
       <a href="#" class="flex items-center gap-3 group">
         <span class="w-10 h-10 rounded-xl bg-paper-950 flex items-center justify-center shrink-0" style="color:rgb(var(--paper-50))">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="6 19 86 62" width="26" height="18" fill="currentColor" aria-hidden="true">
-            <rect x="8"  y="21" width="10" height="58"/>
-            <rect x="36" y="21" width="10" height="58"/>
-            <rect x="8"  y="41" width="38" height="10"/>
-            <path fill-rule="evenodd" d="M 52,79 L 52,21 L 71,51 L 90,21 L 90,79 Z M 62,79 L 80,79 L 80,27 L 71,57 L 62,27 Z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="7 19 86 62" width="26" height="18" fill="currentColor" aria-hidden="true">
+            <!-- Bar 1: H left -->
+            <rect x="9" y="21" width="11" height="58"/>
+            <!-- Bar 2: shared H-right / M-left -->
+            <rect x="44.5" y="21" width="11" height="58"/>
+            <!-- H crossbar -->
+            <rect x="9" y="41" width="46.5" height="10"/>
+            <!-- M: diagonals + bar 3 (evenodd removes inner voids) -->
+            <path fill-rule="evenodd" d="M 44.5,79 L 44.5,21 L 68,51 L 91,21 L 91,79 Z M 55.5,79 L 80,79 L 80,27 L 68,57 L 55.5,27 Z"/>
           </svg>
         </span>
         <span class="font-bold text-base tracking-tight text-paper-950">Harussani Manaphassan</span>
