@@ -3,59 +3,44 @@
   <title>hm — Harussani Manaphassan</title>
 
   <style>
-    /*
-      Adaptive paper / e-ink theme
-      Light → warm cream paper + near-black ink
-      Dark  → near-black ground + warm cream letterforms
-    */
-    :root {
-      --bg:     #F5F0EA;
-      --border: #C2BAB0;
-      --ink:    #0D0D0D;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:     #0D0D0D;
-        --border: #2A2A2A;
-        --ink:    #EDE8E1;
-      }
+    :root { --bg:#F5F0EA; --border:#C2BAB0; --ink:#0D0D0D; }
+    @media (prefers-color-scheme:dark) {
+      :root { --bg:#0D0D0D; --border:#2A2A2A; --ink:#EDE8E1; }
     }
   </style>
 
   <!-- Paper / e-ink background -->
-  <rect width="100" height="100" rx="20" fill="var(--bg)"/>
-
-  <!-- Editorial border frame (thin single rule — letterpress / newspaper motif) -->
-  <rect x="2.5" y="2.5" width="95" height="95" rx="18"
-        fill="none" stroke="var(--border)" stroke-width="1.2"/>
+  <rect width="100" height="100" rx="22" fill="var(--bg)"/>
+  <!-- Editorial border frame -->
+  <rect x="2.5" y="2.5" width="95" height="95" rx="20" fill="none"
+        stroke="var(--border)" stroke-width="1.2"/>
 
   <!--
-    hm merged ligature — single closed path
-    ─────────────────────────────────────────
+    hm Rounded Bold — primary logo
+    ───────────────────────────────
     3 bars:
-      Bar 1  x=15–30  y=12–84  (h ascender — tall)
-      Bar 2  x=43–58  y=36–84  (shared h·right / m·left)
-      Bar 3  x=71–86  y=36–84  (m right)
+      Bar 1  x=15–31 (16 px)  h ascender — tall, ROUNDED TOP cap r=8
+      Bar 2  x=42–58 (16 px)  shared h·right / m·left
+      Bar 3  x=69–85 (16 px)  m right
 
-    2 arches (perfect semicircles, r=6.5, sweep upward):
-      h arch  (30,36) → peak y≈29.5 → (43,36)
-      m arch  (58,36) → peak y≈29.5 → (71,36)
+    2 arches (r=5.5, sweep upward):
+      h arch  (31,36) → peak y≈30.5 → (42,36)
+      m arch  (58,36) → peak y≈30.5 → (69,36)
 
-    Trace (clockwise outer contour):
-      bottom-left → up bar1 → across bar1 top → down to arch level
-      → h arch up → across bar2 top → m arch up → across bar3 top
-      → down bar3 → baseline close
+    Bar 1 rounded cap:
+      left side rises to y=20, then A 8,8,0,0,0 curves to (31,20)
+      peaking at (23,12)
   -->
   <path fill="var(--ink)" d="
     M 15,84
-    L 15,12
-    L 30,12
-    L 30,36
-    A 6.5,6.5,0,0,0 43,36
+    L 15,20
+    A 8,8,0,0,0 31,20
+    L 31,36
+    A 5.5,5.5,0,0,0 42,36
     L 58,36
-    A 6.5,6.5,0,0,0 71,36
-    L 86,36
-    L 86,84
+    A 5.5,5.5,0,0,0 69,36
+    L 85,36
+    L 85,84
     Z
   "/>
 </svg>
