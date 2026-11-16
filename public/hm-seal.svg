@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"
+     role="img" aria-label="晴真 — Harussani Manaphassan">
+  <title>晴真 — Harussani Manaphassan</title>
+
+  <style>
+    /*
+      晴真 Kanji Seal — paper / e-ink adaptive
+      晴 (haru/sei)  = clear skies, sunny        → H
+      真 (ma/shin)   = truth, genuine, real       → M
+      Read vertically: Haru + Ma = HM
+    */
+    :root { --bg:#F5F0EA; --bdr:#C2BAB0; --ink:#0D0D0D; }
+    @media (prefers-color-scheme:dark) {
+      :root { --bg:#0D0D0D; --bdr:#2A2A2A; --ink:#EDE8E1; }
+    }
+  </style>
+
+  <!-- Paper / e-ink background -->
+  <rect width="100" height="100" rx="20" fill="var(--bg)"/>
+
+  <!-- Double editorial border — inkan / hanko seal motif -->
+  <rect x="2.5" y="2.5" width="95" height="95" rx="18"
+        fill="none" stroke="var(--bdr)" stroke-width="1.4"/>
+  <rect x="5.5" y="5.5" width="89" height="89" rx="15"
+        fill="none" stroke="var(--bdr)" stroke-width="0.5"/>
+
+  <!--
+    Thin dividing rule between characters
+    Mirrors the horizontal stroke motif of the kanji inside
+  -->
+  <line x1="22" y1="50" x2="78" y2="50"
+        stroke="var(--bdr)" stroke-width="0.7"/>
+
+  <!--
+    晴  (clear skies / Haru)
+    ─────────────────────────
+    Baseline y=42  |  font-size 36  |  sits in top half
+  -->
+  <text
+    x="50" y="42"
+    text-anchor="middle"
+    font-family="'Hiragino Mincho ProN','Hiragino Mincho Pro','Yu Mincho','YuMincho','MS Mincho','Noto Serif CJK JP','Source Han Serif JP',serif"
+    font-size="36"
+    font-weight="700"
+    fill="var(--ink)">晴</text>
+
+  <!--
+    真  (truth / Ma)
+    ─────────────────────────
+    Baseline y=86  |  font-size 36  |  sits in bottom half
+  -->
+  <text
+    x="50" y="86"
+    text-anchor="middle"
+    font-family="'Hiragino Mincho ProN','Hiragino Mincho Pro','Yu Mincho','YuMincho','MS Mincho','Noto Serif CJK JP','Source Han Serif JP',serif"
+    font-size="36"
+    font-weight="700"
+    fill="var(--ink)">真</text>
+</svg>
