@@ -18,8 +18,9 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        card: resolve(__dirname, 'card.html'),
+        main:  resolve(__dirname, 'index.html'),
+        card:  resolve(__dirname, 'card.html'),
+        brand: resolve(__dirname, 'brand.html'),
       }
     }
   },
