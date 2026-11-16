@@ -1,46 +1,71 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"
-     role="img" aria-label="hm — Harussani Manaphassan">
-  <title>hm — Harussani Manaphassan</title>
+     role="img" aria-label="HM — Harussani Manaphassan">
+  <title>HM — Harussani Manaphassan</title>
 
   <style>
-    :root { --bg:#F5F0EA; --border:#C2BAB0; --ink:#0D0D0D; }
+    /*
+      Adaptive paper / e-ink — kanji brush motif
+      Thick verticals : thin horizontal = 10 : 3  (Mincho ratio)
+    */
+    :root { --bg:#F5F0EA; --bdr:#C2BAB0; --ink:#0D0D0D; }
     @media (prefers-color-scheme:dark) {
-      :root { --bg:#0D0D0D; --border:#2A2A2A; --ink:#EDE8E1; }
+      :root { --bg:#0D0D0D; --bdr:#2A2A2A; --ink:#EDE8E1; }
     }
   </style>
 
   <!-- Paper / e-ink background -->
-  <rect width="100" height="100" rx="22" fill="var(--bg)"/>
-  <!-- Editorial border frame -->
-  <rect x="2.5" y="2.5" width="95" height="95" rx="20" fill="none"
-        stroke="var(--border)" stroke-width="1.2"/>
+  <rect width="100" height="100" rx="20" fill="var(--bg)"/>
+  <rect x="2.5" y="2.5" width="95" height="95" rx="18"
+        fill="none" stroke="var(--bdr)" stroke-width="1.2"/>
 
   <!--
-    hm Rounded Bold — primary logo
-    ───────────────────────────────
-    3 bars:
-      Bar 1  x=15–31 (16 px)  h ascender — tall, ROUNDED TOP cap r=8
-      Bar 2  x=42–58 (16 px)  shared h·right / m·left
-      Bar 3  x=69–85 (16 px)  m right
+    HM Kanji-style merged ligature
+    ─────────────────────────────────────────────────────
+    Shared bar system (3 bars):
+      Bar 1  x=14–24   H left vertical  (10 px thick)
+      Bar 2  x=42–52   SHARED  H·right = M·left  (10 px)
+      Bar 3  x=76–86   M right vertical  (10 px)
 
-    2 arches (r=5.5, sweep upward):
-      h arch  (31,36) → peak y≈30.5 → (42,36)
-      m arch  (58,36) → peak y≈30.5 → (69,36)
+    H:  Bar1 + Bar2 + thin crossbar (3 px — Mincho thick-thin ratio)
+        Crossbar has tome (止) flare at right end
+        Bars have uroko (鱗) triangular serif at bottom
 
-    Bar 1 rounded cap:
-      left side rises to y=20, then A 8,8,0,0,0 curves to (31,20)
-      peaking at (23,12)
+    M:  Bar2 (shared) + Bar3
+        Two tapered diagonal strokes meeting at a V-peak
+        Diagonals: 10 px wide at bar junction → 6 px at peak
+        Kanji diagonal stroke quality (thick beginning, fine end)
+
+    Kanji stroke features:
+      • Uroko (鱗)  — right-pointing triangles at bar bottoms
+      • Tome (止)   — small downward wedge at crossbar right end
+      • Thick-thin  — 10 px vertical : 3 px horizontal = 3.3 : 1
   -->
-  <path fill="var(--ink)" d="
-    M 15,84
-    L 15,20
-    A 8,8,0,0,0 31,20
-    L 31,36
-    A 5.5,5.5,0,0,0 42,36
-    L 58,36
-    A 5.5,5.5,0,0,0 69,36
-    L 85,36
-    L 85,84
-    Z
-  "/>
+
+  <!-- ── H: LEFT VERTICAL BAR (Bar 1) ── -->
+  <rect x="14" y="22" width="10" height="56" fill="var(--ink)"/>
+
+  <!-- ── H: CROSSBAR — thin horizontal (Mincho thin stroke) ── -->
+  <rect x="14" y="43" width="38" height="3" fill="var(--ink)"/>
+  <!-- Tome (止) — downward wedge at crossbar right end -->
+  <polygon points="52,43 55,43 52,46" fill="var(--ink)"/>
+
+  <!-- ── SHARED BAR 2 (H right = M left) ── -->
+  <rect x="42" y="22" width="10" height="56" fill="var(--ink)"/>
+
+  <!-- ── M: LEFT DIAGONAL — tapers from bar width to peak ── -->
+  <!-- Top 10 px wide (bar2 width), narrows to 6 px at V-peak y=56 -->
+  <polygon points="42,22 52,22 67,56 61,56" fill="var(--ink)"/>
+
+  <!-- ── M: RIGHT DIAGONAL — tapers from bar width to same peak ── -->
+  <!-- Top 10 px wide (bar3 width), narrows to 6 px at V-peak y=56 -->
+  <polygon points="76,22 86,22 67,56 61,56" fill="var(--ink)"/>
+
+  <!-- ── M: RIGHT VERTICAL BAR (Bar 3) ── -->
+  <rect x="76" y="22" width="10" height="56" fill="var(--ink)"/>
+
+  <!-- ── UROKO (鱗) — triangular serifs at bar bottoms ── -->
+  <!-- Right-pointing wedge: classic Mincho / Song vertical stroke terminal -->
+  <polygon points="24,78 29,78 24,76" fill="var(--ink)"/>  <!-- Bar 1 -->
+  <polygon points="52,78 57,78 52,76" fill="var(--ink)"/>  <!-- Bar 2 -->
+  <polygon points="86,78 91,78 86,76" fill="var(--ink)"/>  <!-- Bar 3 -->
 </svg>

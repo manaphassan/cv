@@ -14,8 +14,17 @@
 
   <!-- Left panel: hm merged letterform (no background box — blends with dark OG bg) -->
   <!-- translate(104,195) scale(2.5) centres the mark at (230,315) in 460×630 panel -->
-  <g transform="translate(104,195) scale(2.5)" fill="white">
-    <path d="M 15,84 L 15,20 A 8,8,0,0,0 31,20 L 31,36 A 5.5,5.5,0,0,0 42,36 L 58,36 A 5.5,5.5,0,0,0 69,36 L 85,36 L 85,84 Z"/>
+  <g transform="translate(105,190) scale(2.5)" fill="white">
+    <rect x="14" y="22" width="10" height="56"/>
+    <rect x="14" y="43" width="38" height="3"/>
+    <polygon points="52,43 55,43 52,46"/>
+    <rect x="42" y="22" width="10" height="56"/>
+    <polygon points="42,22 52,22 67,56 61,56"/>
+    <polygon points="76,22 86,22 67,56 61,56"/>
+    <rect x="76" y="22" width="10" height="56"/>
+    <polygon points="24,78 29,78 24,76"/>
+    <polygon points="52,78 57,78 52,76"/>
+    <polygon points="86,78 91,78 86,76"/>
   </g>
 
   <!-- Vertical divider -->
