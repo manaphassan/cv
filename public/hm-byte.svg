@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"
+     role="img" aria-label="hm — Byte Form (H=0x48, M=0x4D)">
+  <title>hm — Byte Form</title>
+
+  <style>
+    /*
+      Adaptive paper / e-ink — same theme as primary logo
+      Light: warm cream paper + near-black ink
+      Dark:  near-black ground + warm cream marks
+    */
+    :root {
+      --bg:    #F5F0EA;
+      --bdr:   #C2BAB0;
+      --ink:   #0D0D0D;
+      --grid:  rgba(194,186,176,0.55);
+    }
+    @media (prefers-color-scheme:dark) {
+      :root {
+        --bg:   #0D0D0D;
+        --bdr:  #2A2A2A;
+        --ink:  #EDE8E1;
+        --grid: rgba(42,42,42,0.9);
+      }
+    }
+  </style>
+
+  <!-- Paper / e-ink background -->
+  <rect width="100" height="100" rx="20" fill="var(--bg)"/>
+  <rect x="2.5" y="2.5" width="95" height="95" rx="18"
+        fill="none" stroke="var(--bdr)" stroke-width="1.2"/>
+
+  <!--
+    ┌─────────────────────────────────────────────────────┐
+    │  H = 72 dec  = 0x48 = 01001000                      │
+    │  M = 77 dec  = 0x4D = 01001101                      │
+    │                                                     │
+    │  8×2 binary grid                                    │
+    │  Columns 0–7 = bits 7→0  (MSB left, LSB right)     │
+    │  Row 0 = H  |  Row 1 = M                           │
+    │  ■ = bit 1  |  □ = bit 0                           │
+    │                                                     │
+    │  Cell 9×9 px · col-gap 2 px · row-gap 3 px         │
+    │  x_start = 7  · row0 y = 36  · row1 y = 48         │
+    └─────────────────────────────────────────────────────┘
+
+    Bit layout:
+         b7  b6  b5  b4  b3  b2  b1  b0
+    H:    □   ■   □   □   ■   □   □   □    0x48
+    M:    □   ■   □   □   ■   ■   □   ■    0x4D
+  -->
+
+  <!-- ── EMPTY CELLS (grid structure, outlined) ── -->
+  <!-- Row 0  H — bits 7,5,4,2,1,0 → cols 0,2,3,5,6,7 -->
+  <rect x="7"  y="36" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="29" y="36" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="40" y="36" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="62" y="36" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="73" y="36" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="84" y="36" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+
+  <!-- Row 1  M — bits 7,5,4,1 → cols 0,2,3,6 -->
+  <rect x="7"  y="48" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="29" y="48" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="40" y="48" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+  <rect x="73" y="48" width="9" height="9" rx="1.5" fill="none" stroke="var(--grid)" stroke-width="0.7"/>
+
+  <!-- ── FILLED CELLS (bit = 1) ── -->
+  <!-- Row 0  H: bit6, bit3 → cols 1, 4 -->
+  <rect x="18" y="36" width="9" height="9" rx="1.5" fill="var(--ink)"/>
+  <rect x="51" y="36" width="9" height="9" rx="1.5" fill="var(--ink)"/>
+
+  <!-- Row 1  M: bit6, bit3, bit2, bit0 → cols 1, 4, 5, 7 -->
+  <rect x="18" y="48" width="9" height="9" rx="1.5" fill="var(--ink)"/>
+  <rect x="51" y="48" width="9" height="9" rx="1.5" fill="var(--ink)"/>
+  <rect x="62" y="48" width="9" height="9" rx="1.5" fill="var(--ink)"/>
+  <rect x="84" y="48" width="9" height="9" rx="1.5" fill="var(--ink)"/>
+
+  <!-- Annotation — visible at ≥64 px, invisible at favicon scale -->
+  <text x="50" y="69"
+        text-anchor="middle"
+        font-family="'Courier New',Courier,monospace"
+        font-size="5.5" letter-spacing="0.6"
+        fill="var(--bdr)">H 0x48  ·  M 0x4D</text>
+</svg>
