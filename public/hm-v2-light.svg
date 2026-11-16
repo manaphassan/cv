@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"
+     role="img" aria-label="hm — Light Editorial">
+  <title>hm — Light Editorial</title>
+  <style>
+    :root { --bg:#F5F0EA; --border:#C2BAB0; --ink:#0D0D0D; }
+    @media (prefers-color-scheme:dark) {
+      :root { --bg:#0D0D0D; --border:#2A2A2A; --ink:#EDE8E1; }
+    }
+  </style>
+  <rect width="100" height="100" rx="20" fill="var(--bg)"/>
+  <rect x="2.5" y="2.5" width="95" height="95" rx="18" fill="none" stroke="var(--border)" stroke-width="1.2"/>
+  <rect x="4.5" y="4.5" width="91" height="91" rx="16" fill="none" stroke="var(--border)" stroke-width="0.4"/>
+  <!--
+    V2: Light Editorial
+    Bar width 8px · Gap 20px (wide breathing room)
+    Large prominent arches (radius 10) · Very delicate weight
+    Bar 1: x=18–26  Bar 2: x=46–54  Bar 3: x=74–82
+  -->
+  <path fill="var(--ink)" d="
+    M 18,86
+    L 18,10
+    L 26,10
+    L 26,36
+    A 10,10,0,0,0 46,36
+    L 54,36
+    A 10,10,0,0,0 74,36
+    L 82,36
+    L 82,86
+    Z
+  "/>
+</svg>
